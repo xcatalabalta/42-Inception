@@ -22,6 +22,9 @@ RUN apk add --no-cache \
     curl \
     mysql-client
 
+# Create symlink for php command (wp-cli expects 'php')
+RUN ln -s /usr/bin/php82 /usr/bin/php
+
 # Create necessary directories
 RUN mkdir -p /var/www/html /run/php
 
@@ -29,6 +32,9 @@ RUN mkdir -p /var/www/html /run/php
 RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
     && chmod +x wp-cli.phar \
     && mv wp-cli.phar /usr/local/bin/wp
+
+# Copy PHP configuration
+COPY conf/php.ini /etc/php82/conf.d/custom.ini
 
 # Copy PHP-FPM configuration
 COPY conf/my_www.conf /etc/php82/php-fpm.d/www.conf

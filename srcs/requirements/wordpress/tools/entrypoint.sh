@@ -8,10 +8,19 @@ fi
 
 # Wait for MariaDB to be ready
 echo "Waiting for MariaDB to be ready..."
-until mysql -h"${MYSQL_HOST:-localhost}" -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" -e "SELECT 1" > /dev/null 2>&1; do
-    echo "MariaDB is unavailable - sleeping"
-    sleep 3
+MAX_TRIES=30
+TRIES=0
+
+until mariadb -h"${MYSQL_HOST:-127.0.0.1}" -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" -e "SELECT 1" >/dev/null 2>&1; do
+    TRIES=$((TRIES + 1))
+    if [ $TRIES -ge $MAX_TRIES ]; then
+        echo "ERROR: MariaDB did not become ready in time"
+        exit 1
+    fi
+    echo "MariaDB is unavailable - sleeping (attempt $TRIES/$MAX_TRIES)"
+    sleep 2
 done
+
 echo "MariaDB is up and running!"
 
 # Download WordPress if not already present
@@ -25,11 +34,12 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --dbname="${MYSQL_DATABASE}" \
         --dbuser="${MYSQL_USER}" \
         --dbpass="${MYSQL_PASSWORD}" \
-        --dbhost="${MYSQL_HOST:-localhost}" \
+        --dbhost="${MYSQL_HOST:--127.0.0.1}" \
         --path=/var/www/html
     
     echo "WordPress files ready"
 fi
 
 # Start PHP-FPM
+echo "Starting PHP-FPM..."
 exec php-fpm82 -F
