@@ -9,7 +9,7 @@ COPY conf/my_nginx.conf /etc/nginx/nginx.conf
 COPY tools/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-COPY html/index.html /usr/share/nginx/html/index.html
+# COPY html/index.html /usr/share/nginx/html/index.html
 
 EXPOSE 80 443
 
