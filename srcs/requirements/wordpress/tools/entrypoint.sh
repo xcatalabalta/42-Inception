@@ -1,12 +1,10 @@
 #!/bin/sh
 set -e
 
-# Load secrets if present
 if [ -f "$MYSQL_PASSWORD_FILE" ]; then
     export MYSQL_PASSWORD=$(cat "$MYSQL_PASSWORD_FILE")
 fi
 
-# Wait for MariaDB to be ready
 echo "Waiting for MariaDB to be ready..."
 MAX_TRIES=30
 TRIES=0
@@ -23,23 +21,51 @@ done
 
 echo "MariaDB is up and running!"
 
-# Download WordPress if not already present
-if [ ! -f /var/www/html/wp-config.php ]; then
+if [ ! -f /var/www/html/index.php ]; then
     echo "Downloading WordPress..."
     wp core download --allow-root --path=/var/www/html
-    
+    echo "WordPress files downloaded"
+fi
+
+if [ ! -f /var/www/html/wp-config.php ]; then
     echo "Creating wp-config.php..."
     wp config create \
         --allow-root \
         --dbname="${MYSQL_DATABASE}" \
         --dbuser="${MYSQL_USER}" \
         --dbpass="${MYSQL_PASSWORD}" \
-        --dbhost="${MYSQL_HOST:--127.0.0.1}" \
+        --dbhost="${MYSQL_HOST:-127.0.0.1}" \
         --path=/var/www/html
-    
-    echo "WordPress files ready"
+    echo "wp-config.php created"
 fi
 
-# Start PHP-FPM
+if ! wp core is-installed --allow-root --path=/var/www/html 2>/dev/null; then
+    echo "Installing WordPress..."
+    wp core install \
+        --allow-root \
+        --path=/var/www/html \
+        --url="${WP_URL}" \
+        --title="${WP_TITLE}" \
+        --admin_user="${WP_ADMIN_USER}" \
+        --admin_password="${WP_ADMIN_PASSWORD}" \
+        --admin_email="${WP_ADMIN_EMAIL}" \
+        --skip-email
+    
+    echo "WordPress installed successfully!"
+    
+    echo "Creating additional user: ${WP_USER}..."
+    wp user create \
+        --allow-root \
+        --path=/var/www/html \
+        "${WP_USER}" \
+        "${WP_USER_EMAIL}" \
+        --role=editor \
+        --user_pass="${WP_USER_PASSWORD}"
+    
+    echo "Additional user created successfully!"
+else
+    echo "WordPress is already installed"
+fi
+
 echo "Starting PHP-FPM..."
 exec php-fpm82 -F
