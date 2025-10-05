@@ -8,11 +8,10 @@ services:
     env_file: .env
     volumes:
       - mariadb_data:/var/lib/mysql
-    network_mode: "host"
-#    networks:
-#      - inception
-    ports:
-      - "3306:3306"
+    networks:
+      - inception
+    expose:
+      - "3306"
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
@@ -20,11 +19,12 @@ services:
     env_file: .env
     volumes:
       - wordpress_data:/var/www/html
-    network_mode: "host"
+    networks:
+      - inception
     depends_on:
       - mariadb
-    ports:
-      - "9000:9000"
+    expose:
+      - "9000"
 
   nginx:
     build: ./requirements/nginx
@@ -32,7 +32,8 @@ services:
     restart: always
     volumes:
       - wordpress_data:/var/www/html
-    network_mode: "host"
+    networks:
+      - inception
     depends_on:
       - wordpress
     ports:
@@ -44,7 +45,7 @@ volumes:
   wordpress_data:
 
 
-#networks:
-#  inception:
-#    driver: bridge
+networks:
+ inception:
+   driver: bridge
 

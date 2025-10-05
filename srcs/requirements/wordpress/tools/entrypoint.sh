@@ -9,7 +9,7 @@ echo "Waiting for MariaDB to be ready..."
 MAX_TRIES=30
 TRIES=0
 
-until mariadb -h"${MYSQL_HOST:-127.0.0.1}" -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" -e "SELECT 1" >/dev/null 2>&1; do
+until mariadb -h"${MYSQL_HOST:-localhost}" -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" -e "SELECT 1" >/dev/null 2>&1; do
     TRIES=$((TRIES + 1))
     if [ $TRIES -ge $MAX_TRIES ]; then
         echo "ERROR: MariaDB did not become ready in time"
@@ -34,7 +34,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --dbname="${MYSQL_DATABASE}" \
         --dbuser="${MYSQL_USER}" \
         --dbpass="${MYSQL_PASSWORD}" \
-        --dbhost="${MYSQL_HOST:-127.0.0.1}" \
+        --dbhost="${MYSQL_HOST:-localhost}" \
         --path=/var/www/html
     echo "wp-config.php created"
 fi
