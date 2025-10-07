@@ -1,0 +1,731 @@
+===============================================
+DIRECTORY TREE STRUCTURE
+===============================================
+
+.
+├── content.txt
+├── docker-compose.yml
+├── gen_context.sh
+└── requirements
+    ├── mariadb
+    │   ├── Dockerfile
+    │   ├── conf
+    │   │   └── my.cnf
+    │   └── tools
+    │       ├── entrypoint copy.sh
+    │       └── entrypoint.sh
+    ├── nginx
+    │   ├── Dockerfile
+    │   ├── conf
+    │   │   └── my_nginx.conf
+    │   ├── html
+    │   │   └── index.html
+    │   └── tools
+    │       └── entrypoint.sh
+    ├── tools
+    └── wordpress
+        ├── Dockerfile
+        ├── conf
+        │   ├── my_www.conf
+        │   └── php.ini
+        └── tools
+            └── entrypoint.sh
+
+13 directories, 15 files
+
+
+===============================================
+RECURSIVE FILE LISTING (ls -laR)
+===============================================
+
+.:
+total 28
+drwxrwxr-x    3 fcatala- fcatala-      4096 Oct  7 16:49 .
+drwxrwxr-x    5 fcatala- fcatala-      4096 Oct  7 15:45 ..
+-rw-r--r--    1 fcatala- fcatala-       338 Oct  7 16:22 .env
+-rw-r--r--    1 fcatala- fcatala-      1104 Oct  7 16:49 content.txt
+-rw-r--r--    1 fcatala- fcatala-       869 Oct  7 16:22 docker-compose.yml
+-rwxr-xr-x    1 fcatala- fcatala-      2931 Oct  7 16:30 gen_context.sh
+drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 requirements
+
+./requirements:
+total 24
+drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 .
+drwxrwxr-x    3 fcatala- fcatala-      4096 Oct  7 16:49 ..
+drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:41 mariadb
+drwxrwxr-x    5 fcatala- fcatala-      4096 Sep 10 16:09 nginx
+drwxrwxr-x    2 fcatala- fcatala-      4096 Sep 10 16:38 tools
+drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:54 wordpress
+
+./requirements/mariadb:
+total 20
+drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:41 .
+drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 ..
+-rw-rw-r--    1 fcatala- fcatala-         0 Jul 29 16:41 .dockerignore
+-rw-rw-r--    1 fcatala- fcatala-       392 Sep  3 16:54 Dockerfile
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 conf
+drwxrwxr-x    2 fcatala- fcatala-      4096 Sep  6 14:41 tools
+
+./requirements/mariadb/conf:
+total 12
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 .
+drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:41 ..
+-rw-r--r--    1 fcatala- fcatala-       127 Oct  7 16:22 my.cnf
+
+./requirements/mariadb/tools:
+total 16
+drwxrwxr-x    2 fcatala- fcatala-      4096 Sep  6 14:41 .
+drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:41 ..
+-rw-r--r--    1 fcatala- fcatala-       766 Sep  6 15:00 entrypoint copy.sh
+-rw-r--r--    1 fcatala- fcatala-      1540 Sep  6 17:09 entrypoint.sh
+
+./requirements/nginx:
+total 24
+drwxrwxr-x    5 fcatala- fcatala-      4096 Sep 10 16:09 .
+drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 ..
+-rw-r--r--    1 fcatala- fcatala-         0 Jul 29 16:48 .dockerignore
+-rw-r--r--    1 fcatala- fcatala-       435 Oct  5 13:10 Dockerfile
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 conf
+drwxr-xr-x    2 fcatala- fcatala-      4096 Sep 10 16:27 html
+drwxrwxr-x    2 fcatala- fcatala-      4096 Sep 10 16:38 tools
+
+./requirements/nginx/conf:
+total 12
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 .
+drwxrwxr-x    5 fcatala- fcatala-      4096 Sep 10 16:09 ..
+-rw-r--r--    1 fcatala- fcatala-      1626 Oct  7 16:22 my_nginx.conf
+
+./requirements/nginx/html:
+total 12
+drwxr-xr-x    2 fcatala- fcatala-      4096 Sep 10 16:27 .
+drwxrwxr-x    5 fcatala- fcatala-      4096 Sep 10 16:09 ..
+-rw-r--r--    1 fcatala- fcatala-       170 Sep 10 16:31 index.html
+
+./requirements/nginx/tools:
+total 12
+drwxrwxr-x    2 fcatala- fcatala-      4096 Sep 10 16:38 .
+drwxrwxr-x    5 fcatala- fcatala-      4096 Sep 10 16:09 ..
+-rw-r--r--    1 fcatala- fcatala-       438 Sep 10 17:46 entrypoint.sh
+
+./requirements/tools:
+total 8
+drwxrwxr-x    2 fcatala- fcatala-      4096 Sep 10 16:38 .
+drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 ..
+
+./requirements/wordpress:
+total 20
+drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:54 .
+drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 ..
+-rw-r--r--    1 fcatala- fcatala-         0 Jul 29 16:54 .dockerignore
+-rw-r--r--    1 fcatala- fcatala-      1114 Oct  5 12:38 Dockerfile
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  5 12:36 conf
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 tools
+
+./requirements/wordpress/conf:
+total 16
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  5 12:36 .
+drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:54 ..
+-rw-r--r--    1 fcatala- fcatala-       211 Oct  5 11:01 my_www.conf
+-rw-r--r--    1 fcatala- fcatala-        91 Oct  5 12:36 php.ini
+
+./requirements/wordpress/tools:
+total 12
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 .
+drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:54 ..
+-rwxr-xr-x    1 fcatala- fcatala-      1953 Oct  7 16:22 entrypoint.sh
+
+
+===============================================
+FILE CONTENTS
+===============================================
+
+-----------------------------------------------
+File: ./gen_context.sh
+-----------------------------------------------
+#!/bin/sh
+
+# Script to create content.txt with directory structure, file listings, and contents
+# Compatible with Alpine Linux (ash/busybox)
+# Usage: ./generate_content.sh
+
+OUTPUT_FILE="content.txt"
+
+# Clear the output file if it exists
+> "$OUTPUT_FILE"
+
+echo "Generating content.txt..."
+
+# 1. Add directory tree
+echo "===============================================" >> "$OUTPUT_FILE"
+echo "DIRECTORY TREE STRUCTURE" >> "$OUTPUT_FILE"
+echo "===============================================" >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+
+if command -v tree >/dev/null 2>&1; then
+    tree >> "$OUTPUT_FILE"
+else
+    # Fallback if tree command is not available
+    find . -type d | sed 's|[^/]*/|  |g' >> "$OUTPUT_FILE"
+fi
+
+echo "" >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+
+# 2. Add ls -laR output
+echo "===============================================" >> "$OUTPUT_FILE"
+echo "RECURSIVE FILE LISTING (ls -laR)" >> "$OUTPUT_FILE"
+echo "===============================================" >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+
+ls -laR >> "$OUTPUT_FILE"
+
+echo "" >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+
+# 3. Add file contents
+echo "===============================================" >> "$OUTPUT_FILE"
+echo "FILE CONTENTS" >> "$OUTPUT_FILE"
+echo "===============================================" >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+
+# RECURSIVE FILE READING: The 'find' command searches recursively from the current 
+# directory (.) through ALL subdirectories for regular files (-type f).
+# Each file found is then read with 'cat' to display its content.
+# This ensures files in nested subdirectories are included.
+find . -type f ! -name "$OUTPUT_FILE" | while read -r file; do
+    echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+    echo "File: $file" >> "$OUTPUT_FILE"
+    echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+    
+    # Check if file is readable
+    if [ -r "$file" ]; then
+        # Try to detect binary files - Alpine compatible method
+        if command -v file >/dev/null 2>&1; then
+            # If 'file' command exists, use it
+            if file "$file" | grep -q "text"; then
+                cat "$file" >> "$OUTPUT_FILE"
+            else
+                echo "[Binary file - content not displayed]" >> "$OUTPUT_FILE"
+            fi
+        else
+            # Fallback: try to read the file, but be aware it might be binary
+            # Check for null bytes as indicator of binary content
+            if grep -q '\x00' "$file" 2>/dev/null; then
+                echo "[Binary file detected - content not displayed]" >> "$OUTPUT_FILE"
+            else
+                cat "$file" >> "$OUTPUT_FILE"
+            fi
+        fi
+    else
+        echo "[File not readable - permission denied]" >> "$OUTPUT_FILE"
+    fi
+    
+    echo "" >> "$OUTPUT_FILE"
+    echo "" >> "$OUTPUT_FILE"
+done
+
+echo "Content generation complete! Output saved to $OUTPUT_FILE"
+
+
+-----------------------------------------------
+File: ./.env
+-----------------------------------------------
+MYSQL_DATABASE=wordpress
+MYSQL_USER=wp_user
+MYSQL_PASSWORD=wp_pass
+MYSQL_ROOT_PASSWORD=root_pass
+MYSQL_HOST=127.0.0.1
+WP_TITLE=Inception WordPress
+WP_ADMIN_USER=siteowner
+WP_ADMIN_PASSWORD=Admin123!
+WP_ADMIN_EMAIL=admin@fcatala.42.fr
+WP_USER=editor
+WP_USER_PASSWORD=User123!
+WP_USER_EMAIL=user@fcatala.42.fr
+WP_URL=https://fcatala-.42.fr
+
+
+-----------------------------------------------
+File: ./docker-compose.yml
+-----------------------------------------------
+# version: "3.8"
+
+services:
+  mariadb:
+    build: ./requirements/mariadb
+    container_name: mariadb
+    restart: always
+    env_file: .env
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    network_mode: "host"
+#    networks:
+#      - inception
+    ports:
+      - "3306:3306"
+  wordpress:
+    build: ./requirements/wordpress
+    container_name: wordpress
+    restart: always
+    env_file: .env
+    volumes:
+      - wordpress_data:/var/www/html
+    network_mode: "host"
+    depends_on:
+      - mariadb
+    ports:
+      - "9000:9000"
+
+  nginx:
+    build: ./requirements/nginx
+    container_name: nginx
+    restart: always
+    volumes:
+      - wordpress_data:/var/www/html
+    network_mode: "host"
+    depends_on:
+      - wordpress
+    ports:
+      - "80:80"
+      - "443:443"
+
+volumes:
+  mariadb_data:
+  wordpress_data:
+
+
+#networks:
+#  inception:
+#    driver: bridge
+
+
+
+-----------------------------------------------
+File: ./requirements/nginx/html/index.html
+-----------------------------------------------
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>fcatala-.42.fr</title></head>
+  <body>
+    <h1>Hello from Nginx on fcatala-.42.fr 🚀</h1>
+  </body>
+</html>
+
+
+-----------------------------------------------
+File: ./requirements/nginx/conf/my_nginx.conf
+-----------------------------------------------
+# events {
+#     worker_connections 1024;
+# }
+
+# http {
+#     # Redirect HTTP to HTTPS
+#     server {
+#         listen 80;
+#         server_name fcatala-.42.fr;
+#         return 301 https://$host$request_uri;
+#     }
+
+#     # HTTPS server
+#     server {
+#         listen 443 ssl;
+#         server_name fcatala-.42.fr;
+
+#         ssl_certificate     /etc/nginx/certs/nginx.crt;
+#         ssl_certificate_key /etc/nginx/certs/nginx.key;
+
+#         root /usr/share/nginx/html;
+#         index index.html;
+
+#         location / {
+#             try_files $uri $uri/ =404;
+#         }
+#     }
+# }
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    # Redirect HTTP to HTTPS
+    server {
+        listen 80;
+        server_name fcatala-.42.fr;
+        return 301 https://$host$request_uri;
+    }
+
+    # HTTPS server
+    server {
+        listen 443 ssl;
+        server_name fcatala-.42.fr;
+
+        ssl_certificate     /etc/nginx/certs/nginx.crt;
+        ssl_certificate_key /etc/nginx/certs/nginx.key;
+        ssl_protocols TLSv1.2 TLSv1.3;
+
+        root /var/www/html;
+        index index.php index.html index.htm;
+
+        location / {
+            try_files $uri $uri/ /index.php?$args;
+        }
+
+        location ~ \.php$ {
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index index.php;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_param PATH_INFO $fastcgi_path_info;
+        }
+
+        location ~ /\.ht {
+            deny all;
+        }
+    }
+}
+
+
+-----------------------------------------------
+File: ./requirements/nginx/tools/entrypoint.sh
+-----------------------------------------------
+#!/bin/sh
+set -e
+
+CERT_DIR=/etc/nginx/certs
+CRT=$CERT_DIR/nginx.crt
+KEY=$CERT_DIR/nginx.key
+DOMAIN=fcatala-.42.fr
+
+# Create directory first
+mkdir -p "$CERT_DIR"
+
+if [ ! -f "$CRT" ] || [ ! -f "$KEY" ]; then
+    echo "Generating self-signed certificate for $DOMAIN..."
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+      -keyout "$KEY" -out "$CRT" -subj "/CN=$DOMAIN"
+fi
+
+# Start nginx in foreground
+exec nginx -g 'daemon off;'
+
+
+-----------------------------------------------
+File: ./requirements/nginx/Dockerfile
+-----------------------------------------------
+FROM alpine:3.21
+
+RUN apk add --no-cache nginx openssl
+RUN mkdir -p /run/nginx /etc/nginx/certs /usr/share/nginx/html
+
+# Remove the default nginx config and use your complete config
+COPY conf/my_nginx.conf /etc/nginx/nginx.conf
+
+COPY tools/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# COPY html/index.html /usr/share/nginx/html/index.html
+
+EXPOSE 80 443
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]
+
+
+-----------------------------------------------
+File: ./requirements/nginx/.dockerignore
+-----------------------------------------------
+[Binary file - content not displayed]
+
+
+-----------------------------------------------
+File: ./requirements/wordpress/conf/php.ini
+-----------------------------------------------
+memory_limit = 256M
+upload_max_filesize = 64M
+post_max_size = 64M
+max_execution_time = 300
+
+
+-----------------------------------------------
+File: ./requirements/wordpress/conf/my_www.conf
+-----------------------------------------------
+[www]
+user = nobody
+group = nobody
+listen = 9000
+listen.owner = nobody
+listen.group = nobody
+pm = dynamic
+pm.max_children = 5
+pm.start_servers = 2
+pm.min_spare_servers = 1
+pm.max_spare_servers = 3
+clear_env = no
+
+-----------------------------------------------
+File: ./requirements/wordpress/tools/entrypoint.sh
+-----------------------------------------------
+#!/bin/sh
+set -e
+
+if [ -f "$MYSQL_PASSWORD_FILE" ]; then
+    export MYSQL_PASSWORD=$(cat "$MYSQL_PASSWORD_FILE")
+fi
+
+echo "Waiting for MariaDB to be ready..."
+MAX_TRIES=30
+TRIES=0
+
+until mariadb -h"${MYSQL_HOST:-127.0.0.1}" -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" -e "SELECT 1" >/dev/null 2>&1; do
+    TRIES=$((TRIES + 1))
+    if [ $TRIES -ge $MAX_TRIES ]; then
+        echo "ERROR: MariaDB did not become ready in time"
+        exit 1
+    fi
+    echo "MariaDB is unavailable - sleeping (attempt $TRIES/$MAX_TRIES)"
+    sleep 2
+done
+
+echo "MariaDB is up and running!"
+
+if [ ! -f /var/www/html/index.php ]; then
+    echo "Downloading WordPress..."
+    wp core download --allow-root --path=/var/www/html
+    echo "WordPress files downloaded"
+fi
+
+if [ ! -f /var/www/html/wp-config.php ]; then
+    echo "Creating wp-config.php..."
+    wp config create \
+        --allow-root \
+        --dbname="${MYSQL_DATABASE}" \
+        --dbuser="${MYSQL_USER}" \
+        --dbpass="${MYSQL_PASSWORD}" \
+        --dbhost="${MYSQL_HOST:-127.0.0.1}" \
+        --path=/var/www/html
+    echo "wp-config.php created"
+fi
+
+if ! wp core is-installed --allow-root --path=/var/www/html 2>/dev/null; then
+    echo "Installing WordPress..."
+    wp core install \
+        --allow-root \
+        --path=/var/www/html \
+        --url="${WP_URL}" \
+        --title="${WP_TITLE}" \
+        --admin_user="${WP_ADMIN_USER}" \
+        --admin_password="${WP_ADMIN_PASSWORD}" \
+        --admin_email="${WP_ADMIN_EMAIL}" \
+        --skip-email
+    
+    echo "WordPress installed successfully!"
+    
+    echo "Creating additional user: ${WP_USER}..."
+    wp user create \
+        --allow-root \
+        --path=/var/www/html \
+        "${WP_USER}" \
+        "${WP_USER_EMAIL}" \
+        --role=editor \
+        --user_pass="${WP_USER_PASSWORD}"
+    
+    echo "Additional user created successfully!"
+else
+    echo "WordPress is already installed"
+fi
+
+echo "Starting PHP-FPM..."
+exec php-fpm82 -F
+
+
+-----------------------------------------------
+File: ./requirements/wordpress/Dockerfile
+-----------------------------------------------
+FROM alpine:3.21
+
+# Install PHP-FPM and required PHP extensions for WordPress
+RUN apk add --no-cache \
+    php82 \
+    php82-fpm \
+    php82-mysqli \
+    php82-json \
+    php82-curl \
+    php82-dom \
+    php82-exif \
+    php82-fileinfo \
+    php82-mbstring \
+    php82-openssl \
+    php82-xml \
+    php82-zip \
+    php82-phar \
+    php82-intl \
+    php82-opcache \
+    php82-session \
+    php82-gd \
+    curl \
+    mysql-client
+
+# Create symlink for php command (wp-cli expects 'php')
+RUN ln -s /usr/bin/php82 /usr/bin/php
+
+# Create necessary directories
+RUN mkdir -p /var/www/html /run/php
+
+# Download wp-cli (WordPress command line tool)
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp
+
+# Copy PHP configuration
+COPY conf/php.ini /etc/php82/conf.d/custom.ini
+
+# Copy PHP-FPM configuration
+COPY conf/my_www.conf /etc/php82/php-fpm.d/www.conf
+
+# Copy entrypoint script
+COPY tools/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+WORKDIR /var/www/html
+
+EXPOSE 9000
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+
+-----------------------------------------------
+File: ./requirements/wordpress/.dockerignore
+-----------------------------------------------
+[Binary file - content not displayed]
+
+
+-----------------------------------------------
+File: ./requirements/mariadb/conf/my.cnf
+-----------------------------------------------
+[mysqld]
+user=mysql
+datadir=/var/lib/mysql
+socket=/run/mysqld/mysqld.sock
+pid-file=/run/mysqld/mysqld.pid
+bind-address=0.0.0.0
+
+
+-----------------------------------------------
+File: ./requirements/mariadb/tools/entrypoint copy.sh
+-----------------------------------------------
+#!/bin/sh
+set -e
+
+# Load secrets if present
+if [ -f "$MYSQL_PASSWORD_FILE" ]; then
+    export MYSQL_PASSWORD=$(cat "$MYSQL_PASSWORD_FILE")
+fi
+if [ -f "$MYSQL_ROOT_PASSWORD_FILE" ]; then
+    export MYSQL_ROOT_PASSWORD=$(cat "$MYSQL_ROOT_PASSWORD_FILE")
+fi
+
+if [ ! -d "/var/lib/mysql/mysql" ]; then
+    mariadb-install-db --user=mysql --datadir=/var/lib/mysql > /dev/null
+
+    mariadbd --user=mysql --bootstrap << EOF
+FLUSH PRIVILEGES;
+CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
+CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
+ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
+FLUSH PRIVILEGES;
+EOF
+fi
+
+exec mariadbd --user=mysql --console
+
+
+
+-----------------------------------------------
+File: ./requirements/mariadb/tools/entrypoint.sh
+-----------------------------------------------
+#!/bin/sh
+set -e
+
+# Load secrets if present
+if [ -f "$MYSQL_PASSWORD_FILE" ]; then
+    export MYSQL_PASSWORD=$(cat "$MYSQL_PASSWORD_FILE")
+fi
+if [ -f "$MYSQL_ROOT_PASSWORD_FILE" ]; then
+    export MYSQL_ROOT_PASSWORD=$(cat "$MYSQL_ROOT_PASSWORD_FILE")
+fi
+
+# Check if the database has been initialized
+if [ ! -d "/var/lib/mysql/mysql" ]; then
+    echo "Initializing database..."
+    mariadb-install-db --user=mysql --datadir=/var/lib/mysql > /dev/null
+    
+    # Start temporary server for initialization
+    mariadbd --user=mysql --skip-networking --socket=/tmp/mysql.sock &
+    pid="$!"
+    
+    # Wait for server to start
+    sleep 10
+    
+    # Run initialization commands
+    mariadb --socket=/tmp/mysql.sock << EOF
+CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
+-- Create users for both network access (%) and local access (localhost)
+CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';
+
+GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
+GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'localhost';
+ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
+
+-- Remove anonymous users to prevent authentication conflicts
+DELETE FROM mysql.user WHERE User = '';
+DROP DATABASE IF EXISTS test;
+
+FLUSH PRIVILEGES;
+EOF
+    
+    # Stop temporary server
+    kill "$pid"
+    wait "$pid"
+    
+    echo "Database initialized successfully"
+fi
+
+exec mariadbd --user=mysql --console
+
+
+
+-----------------------------------------------
+File: ./requirements/mariadb/Dockerfile
+-----------------------------------------------
+FROM alpine:3.21
+
+RUN apk update && apk add --no-cache mariadb mariadb-client mariadb-server-utils
+
+RUN mkdir -p /run/mysqld \
+    && chown -R mysql:mysql /run/mysqld \
+    && mkdir -p /var/lib/mysql \
+    && chown -R mysql:mysql /var/lib/mysql
+
+COPY ./conf/my.cnf /etc/my.cnf
+
+COPY ./tools/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+EXPOSE 3306
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+
+-----------------------------------------------
+File: ./requirements/mariadb/.dockerignore
+-----------------------------------------------
+[Binary file - content not displayed]
+
+
