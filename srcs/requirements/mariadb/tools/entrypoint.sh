@@ -29,14 +29,14 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
     mariadbd --user=mysql --skip-networking --socket=/tmp/mysql_init.sock &
     pid="$!"
     
-    # Wait for server to start (with timeout)
-    echo "Waiting for MariaDB to start..."
-    for i in $(seq 1 30); do
-        if mariadb --socket=/tmp/mysql_init.sock -e "SELECT 1" >/dev/null 2>&1; then
+    # Wait for MariaDB to be ready using mariadb-admin ping
+    echo "Waiting for MariaDB to be ready..."
+    for i in $(seq 1 60); do
+        if mariadb-admin --socket=/tmp/mysql_init.sock ping >/dev/null 2>&1; then
             echo "✓ MariaDB temporary server is ready"
             break
         fi
-        if [ $i -eq 30 ]; then
+        if [ $i -eq 60 ]; then
             echo "ERROR: MariaDB failed to start in time"
             kill "$pid" 2>/dev/null || true
             exit 1
@@ -45,36 +45,34 @@ if [ ! -d "/var/lib/mysql/mysql" ]; then
     done
     
     echo "Running initialization SQL..."
-    mariadb --socket=/tmp/mysql_init.sock << EOF_SQL
--- Create database
+    
+    # Execute SQL commands - MUST specify socket and protocol
+    mariadb --socket=/tmp/mysql_init.sock --protocol=socket << EOF_SQL
 CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
-
--- Create users for both network (%) and localhost access
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';
-
--- Grant privileges
 GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
 GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'localhost';
-
--- Set root password
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
-
--- Security: Remove anonymous users and test database
 DELETE FROM mysql.user WHERE User='';
 DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
 DROP DATABASE IF EXISTS test;
 DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
-
--- Apply changes
 FLUSH PRIVILEGES;
 EOF_SQL
     
-    echo "✓ Database initialized successfully"
+    if [ $? -eq 0 ]; then
+        echo "✓ Database initialized successfully"
+    else
+        echo "ERROR: Database initialization failed"
+        mariadb-admin --socket=/tmp/mysql_init.sock shutdown 2>/dev/null || true
+        kill "$pid" 2>/dev/null || true
+        exit 1
+    fi
     
-    # Stop temporary server
+    # Stop temporary server gracefully
     echo "Stopping temporary server..."
-    kill "$pid"
+    mariadb-admin --socket=/tmp/mysql_init.sock shutdown
     wait "$pid" 2>/dev/null || true
     
     echo "✓ Initialization complete"
@@ -84,5 +82,3 @@ fi
 
 echo "Starting MariaDB server..."
 exec mariadbd --user=mysql --console
-
-

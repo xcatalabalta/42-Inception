@@ -2,54 +2,81 @@
 DIRECTORY TREE STRUCTURE
 ===============================================
 
-.
+/home/fcatala-/inception
+├── Makefile
 ├── content.txt
-├── content_old.txt
-├── docker-compose.yml
-├── gen_context.sh
-└── requirements
-    ├── mariadb
-    │   ├── Dockerfile
-    │   ├── conf
-    │   │   └── my.cnf
-    │   └── tools
-    │       └── entrypoint.sh
-    ├── nginx
-    │   ├── Dockerfile
-    │   ├── conf
-    │   │   └── my_nginx.conf
-    │   ├── html
-    │   │   └── index.html
-    │   └── tools
-    │       └── entrypoint.sh
-    ├── tools
-    └── wordpress
-        ├── Dockerfile
-        ├── conf
-        │   ├── my_www.conf
-        │   └── php.ini
-        └── tools
-            └── entrypoint.sh
+├── inception.code-workspace
+├── secrets
+│   ├── credentials.txt
+│   ├── db_password.txt
+│   ├── db_root_password.txt
+│   ├── wp_admin_email.txt
+│   ├── wp_admin_password.txt
+│   ├── wp_admin_user.txt
+│   ├── wp_user.txt
+│   ├── wp_user_email.txt
+│   └── wp_user_password.txt
+└── srcs
+    ├── content.txt
+    ├── content_old.txt
+    ├── docker-compose.yml
+    ├── gen_context.sh
+    └── requirements
+        ├── mariadb
+        │   ├── Dockerfile
+        │   ├── conf
+        │   │   └── my.cnf
+        │   └── tools
+        │       └── entrypoint.sh
+        ├── nginx
+        │   ├── Dockerfile
+        │   ├── conf
+        │   │   └── my_nginx.conf
+        │   ├── html
+        │   │   └── index.html
+        │   └── tools
+        │       └── entrypoint.sh
+        ├── tools
+        └── wordpress
+            ├── Dockerfile
+            ├── conf
+            │   ├── my_www.conf
+            │   └── php.ini
+            └── tools
+                └── entrypoint.sh
 
-13 directories, 15 files
+15 directories, 27 files
 
 
 ===============================================
 RECURSIVE FILE LISTING (ls -laR)
 ===============================================
 
-.:
-total 52
+/home/fcatala-/inception/secrets:
+total 44
+drwx------    2 fcatala- fcatala-      4096 Oct  7 17:54 .
+drwxrwxr-x    5 fcatala- fcatala-      4096 Oct  8 15:05 ..
+-rw-------    1 fcatala- fcatala-       379 Oct  7 17:55 credentials.txt
+-rw-------    1 fcatala- fcatala-        20 Oct  7 17:40 db_password.txt
+-rw-------    1 fcatala- fcatala-        22 Oct  7 17:49 db_root_password.txt
+-rw-------    1 fcatala- fcatala-        20 Oct  7 18:29 wp_admin_email.txt
+-rw-------    1 fcatala- fcatala-        16 Oct  7 17:49 wp_admin_password.txt
+-rw-------    1 fcatala- fcatala-        10 Oct  7 17:49 wp_admin_user.txt
+-rw-------    1 fcatala- fcatala-         7 Oct  7 17:54 wp_user.txt
+-rw-------    1 fcatala- fcatala-        19 Oct  7 18:29 wp_user_email.txt
+-rw-------    1 fcatala- fcatala-        15 Oct  7 17:54 wp_user_password.txt
+/home/fcatala-/inception/srcs:
+total 96
 drwxrwxr-x    3 fcatala- fcatala-      4096 Oct  7 18:28 .
-drwxrwxr-x    5 fcatala- fcatala-      4096 Oct  8 14:54 ..
+drwxrwxr-x    5 fcatala- fcatala-      4096 Oct  8 15:05 ..
 -rw-r--r--    1 fcatala- fcatala-       211 Oct  7 18:14 .env
--rw-r--r--    1 fcatala- fcatala-      1085 Oct  8 14:56 content.txt
+-rw-r--r--    1 fcatala- fcatala-     43719 Oct  8 14:56 content.txt
 -rw-r--r--    1 fcatala- fcatala-     20907 Oct  7 16:49 content_old.txt
 -rw-r--r--    1 fcatala- fcatala-      2114 Oct  7 18:06 docker-compose.yml
--rwxr-xr-x    1 fcatala- fcatala-      2967 Oct  8 14:56 gen_context.sh
+-rwxr-xr-x    1 fcatala- fcatala-      4513 Oct  8 15:09 gen_context.sh
 drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 requirements
 
-./requirements:
+/home/fcatala-/inception/srcs/requirements:
 total 24
 drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 .
 drwxrwxr-x    3 fcatala- fcatala-      4096 Oct  7 18:28 ..
@@ -58,7 +85,7 @@ drwxrwxr-x    5 fcatala- fcatala-      4096 Sep 10 16:09 nginx
 drwxrwxr-x    2 fcatala- fcatala-      4096 Sep 10 16:38 tools
 drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:54 wordpress
 
-./requirements/mariadb:
+/home/fcatala-/inception/srcs/requirements/mariadb:
 total 24
 drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:41 .
 drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 ..
@@ -67,19 +94,19 @@ drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 ..
 drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 conf
 drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 18:16 tools
 
-./requirements/mariadb/conf:
+/home/fcatala-/inception/srcs/requirements/mariadb/conf:
 total 12
 drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 .
 drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:41 ..
 -rw-r--r--    1 fcatala- fcatala-       228 Oct  7 18:16 my.cnf
 
-./requirements/mariadb/tools:
+/home/fcatala-/inception/srcs/requirements/mariadb/tools:
 total 12
 drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 18:16 .
 drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:41 ..
 -rwxr-xr-x    1 fcatala- fcatala-      2880 Oct  8 14:41 entrypoint.sh
 
-./requirements/nginx:
+/home/fcatala-/inception/srcs/requirements/nginx:
 total 24
 drwxrwxr-x    5 fcatala- fcatala-      4096 Sep 10 16:09 .
 drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 ..
@@ -89,30 +116,30 @@ drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 conf
 drwxr-xr-x    2 fcatala- fcatala-      4096 Sep 10 16:27 html
 drwxrwxr-x    2 fcatala- fcatala-      4096 Sep 10 16:38 tools
 
-./requirements/nginx/conf:
+/home/fcatala-/inception/srcs/requirements/nginx/conf:
 total 12
 drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 .
 drwxrwxr-x    5 fcatala- fcatala-      4096 Sep 10 16:09 ..
 -rw-r--r--    1 fcatala- fcatala-      1626 Oct  7 16:22 my_nginx.conf
 
-./requirements/nginx/html:
+/home/fcatala-/inception/srcs/requirements/nginx/html:
 total 12
 drwxr-xr-x    2 fcatala- fcatala-      4096 Sep 10 16:27 .
 drwxrwxr-x    5 fcatala- fcatala-      4096 Sep 10 16:09 ..
 -rw-r--r--    1 fcatala- fcatala-       170 Sep 10 16:31 index.html
 
-./requirements/nginx/tools:
+/home/fcatala-/inception/srcs/requirements/nginx/tools:
 total 12
 drwxrwxr-x    2 fcatala- fcatala-      4096 Sep 10 16:38 .
 drwxrwxr-x    5 fcatala- fcatala-      4096 Sep 10 16:09 ..
 -rw-r--r--    1 fcatala- fcatala-       438 Sep 10 17:46 entrypoint.sh
 
-./requirements/tools:
+/home/fcatala-/inception/srcs/requirements/tools:
 total 8
 drwxrwxr-x    2 fcatala- fcatala-      4096 Sep 10 16:38 .
 drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 ..
 
-./requirements/wordpress:
+/home/fcatala-/inception/srcs/requirements/wordpress:
 total 20
 drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:54 .
 drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 ..
@@ -121,14 +148,14 @@ drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 ..
 drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  5 12:36 conf
 drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 tools
 
-./requirements/wordpress/conf:
+/home/fcatala-/inception/srcs/requirements/wordpress/conf:
 total 16
 drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  5 12:36 .
 drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:54 ..
 -rw-r--r--    1 fcatala- fcatala-       211 Oct  5 11:01 my_www.conf
 -rw-r--r--    1 fcatala- fcatala-        91 Oct  5 12:36 php.ini
 
-./requirements/wordpress/tools:
+/home/fcatala-/inception/srcs/requirements/wordpress/tools:
 total 12
 drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 .
 drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:54 ..
@@ -140,7 +167,7 @@ FILE CONTENTS
 ===============================================
 
 -----------------------------------------------
-File: ./gen_context.sh
+File: /home/fcatala-/inception/srcs/gen_context.sh
 -----------------------------------------------
 #!/bin/sh
 
@@ -163,7 +190,7 @@ echo "===============================================" >> "$OUTPUT_FILE"
 echo "" >> "$OUTPUT_FILE"
 
 if command -v tree >/dev/null 2>&1; then
-    tree >> "$OUTPUT_FILE"
+    tree ~/inception >> "$OUTPUT_FILE"
 else
     # Fallback if tree command is not available
     find . -type d | sed 's|[^/]*/|  |g' >> "$OUTPUT_FILE"
@@ -177,8 +204,8 @@ echo "===============================================" >> "$OUTPUT_FILE"
 echo "RECURSIVE FILE LISTING (ls -laR)" >> "$OUTPUT_FILE"
 echo "===============================================" >> "$OUTPUT_FILE"
 echo "" >> "$OUTPUT_FILE"
-# ls -laR secrets >> "$OUTPUT_FILE"
-ls -laR >> "$OUTPUT_FILE"
+ls -laR ~/inception/secrets >> "$OUTPUT_FILE"
+ls -laR ~/inception/srcs >> "$OUTPUT_FILE"
 
 echo "" >> "$OUTPUT_FILE"
 echo "" >> "$OUTPUT_FILE"
@@ -193,7 +220,7 @@ echo "" >> "$OUTPUT_FILE"
 # directory (.) through ALL subdirectories for regular files (-type f).
 # Each file found is then read with 'cat' to display its content.
 # This ensures files in nested subdirectories are included.
-find . -type f ! -name "$OUTPUT_FILE" | while read -r file; do
+find ~/inception/srcs -type f ! -name "$OUTPUT_FILE" | while read -r file; do
     echo "-----------------------------------------------" >> "$OUTPUT_FILE"
     echo "File: $file" >> "$OUTPUT_FILE"
     echo "-----------------------------------------------" >> "$OUTPUT_FILE"
@@ -225,11 +252,51 @@ find . -type f ! -name "$OUTPUT_FILE" | while read -r file; do
     echo "" >> "$OUTPUT_FILE"
 done
 
+find ~/inception/secrets -type f ! -name "$OUTPUT_FILE" | while read -r file; do
+    echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+    echo "File: $file" >> "$OUTPUT_FILE"
+    echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+    
+    # Check if file is readable
+    if [ -r "$file" ]; then
+        # Try to detect binary files - Alpine compatible method
+        if command -v file >/dev/null 2>&1; then
+            # If 'file' command exists, use it
+            if file "$file" | grep -q "text"; then
+                cat "$file" >> "$OUTPUT_FILE"
+            else
+                echo "[Binary file - content not displayed]" >> "$OUTPUT_FILE"
+            fi
+        else
+            # Fallback: try to read the file, but be aware it might be binary
+            # Check for null bytes as indicator of binary content
+            if grep -q '\x00' "$file" 2>/dev/null; then
+                echo "[Binary file detected - content not displayed]" >> "$OUTPUT_FILE"
+            else
+                cat "$file" >> "$OUTPUT_FILE"
+            fi
+        fi
+    else
+        echo "[File not readable - permission denied]" >> "$OUTPUT_FILE"
+    fi
+    
+    echo "" >> "$OUTPUT_FILE"
+    echo "" >> "$OUTPUT_FILE"
+done
+
+echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+echo "File: Makefile" >> "$OUTPUT_FILE"
+echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+
+cat ~/inception/Makefile >> "$OUTPUT_FILE"
+
+
+
 echo "Content generation complete! Output saved to $OUTPUT_FILE"
 
 
 -----------------------------------------------
-File: ./.env
+File: /home/fcatala-/inception/srcs/.env
 -----------------------------------------------
 # Database Configuration
 MYSQL_DATABASE=wordpress
@@ -245,7 +312,7 @@ DOMAIN_NAME=fcatala-.42.fr
 
 
 -----------------------------------------------
-File: ./docker-compose.yml
+File: /home/fcatala-/inception/srcs/docker-compose.yml
 -----------------------------------------------
 # version: "3.8"
 
@@ -346,7 +413,7 @@ secrets:
 
 
 -----------------------------------------------
-File: ./content_old.txt
+File: /home/fcatala-/inception/srcs/content_old.txt
 -----------------------------------------------
 ===============================================
 DIRECTORY TREE STRUCTURE
@@ -1082,7 +1149,7 @@ File: ./requirements/mariadb/.dockerignore
 
 
 -----------------------------------------------
-File: ./requirements/nginx/html/index.html
+File: /home/fcatala-/inception/srcs/requirements/nginx/html/index.html
 -----------------------------------------------
 <!doctype html>
 <html>
@@ -1094,7 +1161,7 @@ File: ./requirements/nginx/html/index.html
 
 
 -----------------------------------------------
-File: ./requirements/nginx/conf/my_nginx.conf
+File: /home/fcatala-/inception/srcs/requirements/nginx/conf/my_nginx.conf
 -----------------------------------------------
 # events {
 #     worker_connections 1024;
@@ -1172,7 +1239,7 @@ http {
 
 
 -----------------------------------------------
-File: ./requirements/nginx/tools/entrypoint.sh
+File: /home/fcatala-/inception/srcs/requirements/nginx/tools/entrypoint.sh
 -----------------------------------------------
 #!/bin/sh
 set -e
@@ -1196,7 +1263,7 @@ exec nginx -g 'daemon off;'
 
 
 -----------------------------------------------
-File: ./requirements/nginx/Dockerfile
+File: /home/fcatala-/inception/srcs/requirements/nginx/Dockerfile
 -----------------------------------------------
 FROM alpine:3.21
 
@@ -1218,13 +1285,13 @@ CMD ["nginx", "-g", "daemon off;"]
 
 
 -----------------------------------------------
-File: ./requirements/nginx/.dockerignore
+File: /home/fcatala-/inception/srcs/requirements/nginx/.dockerignore
 -----------------------------------------------
 [Binary file - content not displayed]
 
 
 -----------------------------------------------
-File: ./requirements/wordpress/conf/php.ini
+File: /home/fcatala-/inception/srcs/requirements/wordpress/conf/php.ini
 -----------------------------------------------
 memory_limit = 256M
 upload_max_filesize = 64M
@@ -1233,7 +1300,7 @@ max_execution_time = 300
 
 
 -----------------------------------------------
-File: ./requirements/wordpress/conf/my_www.conf
+File: /home/fcatala-/inception/srcs/requirements/wordpress/conf/my_www.conf
 -----------------------------------------------
 [www]
 user = nobody
@@ -1249,7 +1316,7 @@ pm.max_spare_servers = 3
 clear_env = no
 
 -----------------------------------------------
-File: ./requirements/wordpress/tools/entrypoint.sh
+File: /home/fcatala-/inception/srcs/requirements/wordpress/tools/entrypoint.sh
 -----------------------------------------------
 #!/bin/sh
 set -e
@@ -1325,7 +1392,7 @@ exec php-fpm82 -F
 
 
 -----------------------------------------------
-File: ./requirements/wordpress/Dockerfile
+File: /home/fcatala-/inception/srcs/requirements/wordpress/Dockerfile
 -----------------------------------------------
 FROM alpine:3.21
 
@@ -1380,13 +1447,13 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 
 -----------------------------------------------
-File: ./requirements/wordpress/.dockerignore
+File: /home/fcatala-/inception/srcs/requirements/wordpress/.dockerignore
 -----------------------------------------------
 [Binary file - content not displayed]
 
 
 -----------------------------------------------
-File: ./requirements/mariadb/conf/my.cnf
+File: /home/fcatala-/inception/srcs/requirements/mariadb/conf/my.cnf
 -----------------------------------------------
 [mysqld]
 user=mysql
@@ -1403,7 +1470,7 @@ max_connections=100
 
 
 -----------------------------------------------
-File: ./requirements/mariadb/tools/entrypoint.sh
+File: /home/fcatala-/inception/srcs/requirements/mariadb/tools/entrypoint.sh
 -----------------------------------------------
 #!/bin/sh
 set -e
@@ -1492,7 +1559,7 @@ exec mariadbd --user=mysql --console
 
 
 -----------------------------------------------
-File: ./requirements/mariadb/Dockerfile
+File: /home/fcatala-/inception/srcs/requirements/mariadb/Dockerfile
 -----------------------------------------------
 FROM alpine:3.21
 
@@ -1521,10 +1588,159 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 
 -----------------------------------------------
-File: ./requirements/mariadb/.dockerignore
+File: /home/fcatala-/inception/srcs/requirements/mariadb/.dockerignore
 -----------------------------------------------
 *.md
 .git
 .gitignore
 
 
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/db_password.txt
+-----------------------------------------------
+wp_pass_secure_2024
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/credentials.txt
+-----------------------------------------------
+# Database Credentials
+DB_USER: wp_user
+DB_PASSWORD: [see db_password.txt]
+DB_ROOT_PASSWORD: [see db_root_password.txt]
+
+# WordPress Admin
+ADMIN_USER: [see wp_admin_user.txt]
+ADMIN_PASSWORD: [see wp_admin_password.txt]
+ADMIN_EMAIL: [see wp_admin_email.txt]
+
+# WordPress Editor
+USER: [see wp_user.txt]
+USER_PASSWORD: [see wp_user_password.txt]
+USER_EMAIL: [see wp_user_email.txt]
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/wp_admin_password.txt
+-----------------------------------------------
+Admin123!Secure
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/wp_admin_user.txt
+-----------------------------------------------
+siteowner
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/wp_user.txt
+-----------------------------------------------
+editor
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/db_root_password.txt
+-----------------------------------------------
+root_pass_secure_2024
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/wp_user_password.txt
+-----------------------------------------------
+User123!Secure
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/wp_user_email.txt
+-----------------------------------------------
+user@fcatala.42.fr
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/wp_admin_email.txt
+-----------------------------------------------
+admin@fcatala.42.fr
+
+
+-----------------------------------------------
+File: Makefile
+-----------------------------------------------
+# Makefile for Inception project
+
+# Variables
+COMPOSE_FILE = srcs/docker-compose.yml
+DATA_PATH = /home/$(USER)/data
+
+# Colors for output
+GREEN = \033[0;32m
+RED = \033[0;31m
+YELLOW = \033[0;33m
+NC = \033[0m # No Color
+
+all: build up
+
+# Create necessary directories for volumes
+setup:
+	@echo "$(YELLOW)Creating data directories...$(NC)"
+	@mkdir -p $(DATA_PATH)/mariadb
+	@mkdir -p $(DATA_PATH)/wordpress
+	@mkdir -p secrets
+	@echo "$(GREEN)Setup complete!$(NC)"
+
+# Build all containers
+build: setup
+	@echo "$(YELLOW)Building containers...$(NC)"
+	@docker-compose -f $(COMPOSE_FILE) build
+	@echo "$(GREEN)Build complete!$(NC)"
+
+# Start all containers
+up:
+	@echo "$(YELLOW)Starting containers...$(NC)"
+	@docker-compose -f $(COMPOSE_FILE) up -d
+	@echo "$(GREEN)Containers started!$(NC)"
+
+# Stop all containers
+down:
+	@echo "$(YELLOW)Stopping containers...$(NC)"
+	@docker-compose -f $(COMPOSE_FILE) down
+	@echo "$(GREEN)Containers stopped!$(NC)"
+
+# Clean containers and images
+clean: down
+	@echo "$(YELLOW)Cleaning containers and images...$(NC)"
+	@docker-compose -f $(COMPOSE_FILE) down -v --rmi all
+	@echo "$(GREEN)Clean complete!$(NC)"
+
+# Full clean including volumes data
+fclean: clean
+	@echo "$(RED)Removing all data...$(NC)"
+	@sudo rm -rf $(DATA_PATH)/mariadb/*
+	@sudo rm -rf $(DATA_PATH)/wordpress/*
+	@docker system prune -af --volumes
+	@echo "$(GREEN)Full clean complete!$(NC)"
+
+# Rebuild everything
+re: fclean all
+
+# Show logs
+logs:
+	@docker-compose -f $(COMPOSE_FILE) logs -f
+
+# Show container status
+ps:
+	@docker-compose -f $(COMPOSE_FILE) ps
+
+# Show help
+help:
+	@echo "$(GREEN)Inception Makefile Commands:$(NC)"
+	@echo "  make setup  - Create necessary directories"
+	@echo "  make build  - Build all Docker images"
+	@echo "  make up     - Start all containers"
+	@echo "  make down   - Stop all containers"
+	@echo "  make clean  - Stop and remove containers/images"
+	@echo "  make fclean - Full clean including data"
+	@echo "  make re     - Rebuild everything from scratch"
+	@echo "  make logs   - Show container logs"
+	@echo "  make ps     - Show container status"
+
+.PHONY: all build up down clean fclean re logs ps
