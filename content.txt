@@ -7,17 +7,16 @@ DIRECTORY TREE STRUCTURE
 ├── content.txt
 ├── inception.code-workspace
 ├── secrets
-│   ├── credentials.txt
-│   ├── db_password.txt
-│   ├── db_root_password.txt
-│   ├── wp_admin_email.txt
-│   ├── wp_admin_password.txt
-│   ├── wp_admin_user.txt
-│   ├── wp_user.txt
-│   ├── wp_user_email.txt
-│   └── wp_user_password.txt
+│   ├── credentials
+│   ├── db_password
+│   ├── db_root_password
+│   ├── wp_admin_email
+│   ├── wp_admin_password
+│   ├── wp_admin_user
+│   ├── wp_user
+│   ├── wp_user_email
+│   └── wp_user_password
 └── srcs
-    ├── content.txt
     ├── content_old.txt
     ├── docker-compose.yml
     ├── gen_context.sh
@@ -45,7 +44,7 @@ DIRECTORY TREE STRUCTURE
             └── tools
                 └── entrypoint.sh
 
-15 directories, 27 files
+15 directories, 26 files
 
 
 ===============================================
@@ -54,32 +53,31 @@ RECURSIVE FILE LISTING (ls -laR)
 
 /home/fcatala-/inception/secrets:
 total 44
-drwx------    2 fcatala- fcatala-      4096 Oct  7 17:54 .
-drwxrwxr-x    5 fcatala- fcatala-      4096 Oct  8 15:05 ..
--rw-------    1 fcatala- fcatala-       379 Oct  7 17:55 credentials.txt
--rw-------    1 fcatala- fcatala-        20 Oct  7 17:40 db_password.txt
--rw-------    1 fcatala- fcatala-        22 Oct  7 17:49 db_root_password.txt
--rw-------    1 fcatala- fcatala-        20 Oct  7 18:29 wp_admin_email.txt
--rw-------    1 fcatala- fcatala-        16 Oct  7 17:49 wp_admin_password.txt
--rw-------    1 fcatala- fcatala-        10 Oct  7 17:49 wp_admin_user.txt
--rw-------    1 fcatala- fcatala-         7 Oct  7 17:54 wp_user.txt
--rw-------    1 fcatala- fcatala-        19 Oct  7 18:29 wp_user_email.txt
--rw-------    1 fcatala- fcatala-        15 Oct  7 17:54 wp_user_password.txt
+drwx------    2 fcatala- fcatala-      4096 Oct  8 16:15 .
+drwxrwxr-x    5 fcatala- fcatala-      4096 Oct  8 16:27 ..
+-rw-------    1 fcatala- fcatala-       347 Oct  8 16:16 credentials
+-rw-------    1 fcatala- fcatala-         5 Oct  8 16:23 db_password
+-rw-------    1 fcatala- fcatala-         5 Oct  8 16:23 db_root_password
+-rw-------    1 fcatala- fcatala-        20 Oct  7 18:29 wp_admin_email
+-rw-------    1 fcatala- fcatala-         5 Oct  8 16:23 wp_admin_password
+-rw-------    1 fcatala- fcatala-        10 Oct  7 17:49 wp_admin_user
+-rw-------    1 fcatala- fcatala-         7 Oct  7 17:54 wp_user
+-rw-------    1 fcatala- fcatala-        19 Oct  7 18:29 wp_user_email
+-rw-------    1 fcatala- fcatala-         5 Oct  8 16:23 wp_user_password
 /home/fcatala-/inception/srcs:
-total 96
-drwxrwxr-x    3 fcatala- fcatala-      4096 Oct  7 18:28 .
-drwxrwxr-x    5 fcatala- fcatala-      4096 Oct  8 15:05 ..
+total 52
+drwxrwxr-x    3 fcatala- fcatala-      4096 Oct  8 16:25 .
+drwxrwxr-x    5 fcatala- fcatala-      4096 Oct  8 16:27 ..
 -rw-r--r--    1 fcatala- fcatala-       211 Oct  7 18:14 .env
--rw-r--r--    1 fcatala- fcatala-     43719 Oct  8 14:56 content.txt
 -rw-r--r--    1 fcatala- fcatala-     20907 Oct  7 16:49 content_old.txt
--rw-r--r--    1 fcatala- fcatala-      2114 Oct  7 18:06 docker-compose.yml
+-rw-r--r--    1 fcatala- fcatala-      2082 Oct  8 16:07 docker-compose.yml
 -rwxr-xr-x    1 fcatala- fcatala-      4513 Oct  8 15:09 gen_context.sh
 drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 requirements
 
 /home/fcatala-/inception/srcs/requirements:
 total 24
 drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 .
-drwxrwxr-x    3 fcatala- fcatala-      4096 Oct  7 18:28 ..
+drwxrwxr-x    3 fcatala- fcatala-      4096 Oct  8 16:25 ..
 drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:41 mariadb
 drwxrwxr-x    5 fcatala- fcatala-      4096 Sep 10 16:09 nginx
 drwxrwxr-x    2 fcatala- fcatala-      4096 Sep 10 16:38 tools
@@ -90,7 +88,7 @@ total 24
 drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:41 .
 drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 ..
 -rw-rw-r--    1 fcatala- fcatala-        21 Oct  7 18:27 .dockerignore
--rw-rw-r--    1 fcatala- fcatala-       537 Oct  7 18:15 Dockerfile
+-rw-rw-r--    1 fcatala- fcatala-       567 Oct  8 16:11 Dockerfile
 drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 conf
 drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 18:16 tools
 
@@ -98,13 +96,13 @@ drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 18:16 tools
 total 12
 drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 .
 drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:41 ..
--rw-r--r--    1 fcatala- fcatala-       228 Oct  7 18:16 my.cnf
+-rw-r--r--    1 fcatala- fcatala-       228 Oct  8 15:52 my.cnf
 
 /home/fcatala-/inception/srcs/requirements/mariadb/tools:
 total 12
 drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 18:16 .
 drwxrwxr-x    4 fcatala- fcatala-      4096 Jul 29 16:41 ..
--rwxr-xr-x    1 fcatala- fcatala-      2880 Oct  8 14:41 entrypoint.sh
+-rwxr-xr-x    1 fcatala- fcatala-      3148 Oct  8 16:04 entrypoint.sh
 
 /home/fcatala-/inception/srcs/requirements/nginx:
 total 24
@@ -395,21 +393,21 @@ networks:
 
 secrets:
   db_password:
-    file: ../secrets/db_password.txt
+    file: ../secrets/db_password
   db_root_password:
-    file: ../secrets/db_root_password.txt
+    file: ../secrets/db_root_password
   wp_admin_user:
-    file: ../secrets/wp_admin_user.txt
+    file: ../secrets/wp_admin_user
   wp_admin_password:
-    file: ../secrets/wp_admin_password.txt
+    file: ../secrets/wp_admin_password
   wp_admin_email:
-    file: ../secrets/wp_admin_email.txt
+    file: ../secrets/wp_admin_email
   wp_user:
-    file: ../secrets/wp_user.txt
+    file: ../secrets/wp_user
   wp_user_password:
-    file: ../secrets/wp_user_password.txt
+    file: ../secrets/wp_user_password
   wp_user_email:
-    file: ../secrets/wp_user_email.txt
+    file: ../secrets/wp_user_email
 
 
 -----------------------------------------------
@@ -1477,85 +1475,98 @@ set -e
 
 echo "Starting MariaDB entrypoint..."
 
-# Read secrets from Docker secret files
+# ---------------------------------------------------------------------------
+# Load secrets
+# ---------------------------------------------------------------------------
+
 if [ -f "/run/secrets/db_password" ]; then
-    MYSQL_PASSWORD=$(cat /run/secrets/db_password)
-    echo "✓ DB password loaded from secret"
+	MYSQL_PASSWORD=$(cat /run/secrets/db_password)
+	echo "✓ DB password loaded from secret"
 else
-    echo "ERROR: db_password secret not found!"
-    exit 1
+	echo "ERROR: db_password secret not found!"
+	exit 1
 fi
 
 if [ -f "/run/secrets/db_root_password" ]; then
-    MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
-    echo "✓ DB root password loaded from secret"
+	MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
+	echo "✓ DB root password loaded from secret"
 else
-    echo "ERROR: db_root_password secret not found!"
-    exit 1
+	echo "ERROR: db_root_password secret not found!"
+	exit 1
 fi
 
-# Check if database has been initialized
+# ---------------------------------------------------------------------------
+# Ensure required environment variables
+# ---------------------------------------------------------------------------
+
+if [ -z "$MYSQL_DATABASE" ]; then
+	echo "⚠ MYSQL_DATABASE not set, using default: inception_db"
+	MYSQL_DATABASE="inception_db"
+fi
+
+if [ -z "$MYSQL_USER" ]; then
+	echo "⚠ MYSQL_USER not set, using default: inception_user"
+	MYSQL_USER="inception_user"
+fi
+
+# ---------------------------------------------------------------------------
+# Initialize database if not present
+# ---------------------------------------------------------------------------
+
 if [ ! -d "/var/lib/mysql/mysql" ]; then
-    echo "Initializing database..."
-    mariadb-install-db --user=mysql --datadir=/var/lib/mysql > /dev/null
-    
-    echo "Starting temporary MariaDB server..."
-    mariadbd --user=mysql --skip-networking --socket=/tmp/mysql_init.sock &
-    pid="$!"
-    
-    # Wait for MariaDB to be ready using mariadb-admin ping
-    echo "Waiting for MariaDB to be ready..."
-    for i in $(seq 1 60); do
-        if mariadb-admin --socket=/tmp/mysql_init.sock ping >/dev/null 2>&1; then
-            echo "✓ MariaDB temporary server is ready"
-            break
-        fi
-        if [ $i -eq 60 ]; then
-            echo "ERROR: MariaDB failed to start in time"
-            kill "$pid" 2>/dev/null || true
-            exit 1
-        fi
-        sleep 1
-    done
-    
-    echo "Running initialization SQL..."
-    
-    # Execute SQL commands - MUST specify socket and protocol
-    mariadb --socket=/tmp/mysql_init.sock --protocol=socket << EOF_SQL
-CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
-CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
-CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';
-GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
-GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'localhost';
-ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
-DELETE FROM mysql.user WHERE User='';
-DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
-DROP DATABASE IF EXISTS test;
-DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
-FLUSH PRIVILEGES;
-EOF_SQL
-    
-    if [ $? -eq 0 ]; then
-        echo "✓ Database initialized successfully"
-    else
-        echo "ERROR: Database initialization failed"
-        mariadb-admin --socket=/tmp/mysql_init.sock shutdown 2>/dev/null || true
-        kill "$pid" 2>/dev/null || true
-        exit 1
-    fi
-    
-    # Stop temporary server gracefully
-    echo "Stopping temporary server..."
-    mariadb-admin --socket=/tmp/mysql_init.sock shutdown
-    wait "$pid" 2>/dev/null || true
-    
-    echo "✓ Initialization complete"
+	echo "Initializing database..."
+	mariadb-install-db --user=mysql --datadir=/var/lib/mysql > /dev/null
+
+	echo "Starting temporary MariaDB server..."
+	mariadbd --user=mysql --skip-networking \
+		--socket=/tmp/mysql_init.sock &
+	pid="$!"
+
+	echo "Waiting for MariaDB to be ready..."
+	for i in $(seq 1 60); do
+		if mariadb-admin --socket=/tmp/mysql_init.sock ping >/dev/null 2>&1; then
+			echo "✓ MariaDB temporary server is ready"
+			break
+		fi
+		if [ "$i" -eq 60 ]; then
+			echo "ERROR: MariaDB failed to start in time"
+			kill "$pid" 2>/dev/null || true
+			exit 1
+		fi
+		sleep 1
+	done
+
+	echo "Running initialization SQL..."
+
+	cat <<- EOF_SQL | mariadb --no-defaults --protocol=socket --socket=/tmp/mysql_init.sock
+		CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
+		CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+		CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';
+		GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
+		GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'localhost';
+		CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
+		GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+		ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
+		DELETE FROM mysql.user WHERE User='';
+		DROP DATABASE IF EXISTS test;
+		DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%';
+		FLUSH PRIVILEGES;
+	EOF_SQL
+
+	echo "✓ Database initialized successfully"
+
+	echo "Stopping temporary server..."
+	mariadb-admin --socket=/tmp/mysql_init.sock shutdown
+	wait "$pid" 2>/dev/null || true
+
+	echo "✓ Initialization complete"
 else
-    echo "Database already initialized, skipping..."
+	echo "Database already initialized, skipping..."
 fi
 
 echo "Starting MariaDB server..."
 exec mariadbd --user=mysql --console
+
 
 
 -----------------------------------------------
@@ -1565,26 +1576,23 @@ FROM alpine:3.21
 
 # Install MariaDB
 RUN apk update && apk add --no-cache \
-    mariadb \
-    mariadb-client \
-    mariadb-server-utils
+    mariadb mariadb-client mariadb-server-utils
 
-# Create necessary directories with proper permissions
-RUN mkdir -p /run/mysqld \
-    && chown -R mysql:mysql /run/mysqld \
-    && mkdir -p /var/lib/mysql \
-    && chown -R mysql:mysql /var/lib/mysql
+# Remove Alpine’s default client config that forces host=mariadb
+RUN rm -f /etc/mysql/mariadb.conf.d/50-client.cnf
 
-# Copy MariaDB configuration
+# Create required directories and permissions
+RUN mkdir -p /run/mysqld /var/lib/mysql \
+    && chown -R mysql:mysql /run/mysqld /var/lib/mysql
+
+# Copy configuration and entrypoint
 COPY ./conf/my.cnf /etc/my.cnf
-
-# Copy entrypoint script
 COPY ./tools/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 EXPOSE 3306
-
 ENTRYPOINT ["/entrypoint.sh"]
+
 
 
 -----------------------------------------------
@@ -1596,70 +1604,70 @@ File: /home/fcatala-/inception/srcs/requirements/mariadb/.dockerignore
 
 
 -----------------------------------------------
-File: /home/fcatala-/inception/secrets/db_password.txt
+File: /home/fcatala-/inception/secrets/wp_admin_email
 -----------------------------------------------
-wp_pass_secure_2024
+admin@fcatala.42.fr
 
 
 -----------------------------------------------
-File: /home/fcatala-/inception/secrets/credentials.txt
+File: /home/fcatala-/inception/secrets/db_password
+-----------------------------------------------
+1234
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/credentials
 -----------------------------------------------
 # Database Credentials
 DB_USER: wp_user
-DB_PASSWORD: [see db_password.txt]
-DB_ROOT_PASSWORD: [see db_root_password.txt]
+DB_PASSWORD: [see db_password]
+DB_ROOT_PASSWORD: [see db_root_password]
 
 # WordPress Admin
-ADMIN_USER: [see wp_admin_user.txt]
-ADMIN_PASSWORD: [see wp_admin_password.txt]
-ADMIN_EMAIL: [see wp_admin_email.txt]
+ADMIN_USER: [see wp_admin_user]
+ADMIN_PASSWORD: [see wp_admin_password]
+ADMIN_EMAIL: [see wp_admin_email]
 
 # WordPress Editor
-USER: [see wp_user.txt]
-USER_PASSWORD: [see wp_user_password.txt]
-USER_EMAIL: [see wp_user_email.txt]
+USER: [see wp_user]
+USER_PASSWORD: [see wp_user_password]
+USER_EMAIL: [see wp_user_email]
 
 
 -----------------------------------------------
-File: /home/fcatala-/inception/secrets/wp_admin_password.txt
+File: /home/fcatala-/inception/secrets/wp_user_password
 -----------------------------------------------
-Admin123!Secure
+1234
 
 
 -----------------------------------------------
-File: /home/fcatala-/inception/secrets/wp_admin_user.txt
+File: /home/fcatala-/inception/secrets/db_root_password
+-----------------------------------------------
+1234
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/wp_admin_user
 -----------------------------------------------
 siteowner
 
 
 -----------------------------------------------
-File: /home/fcatala-/inception/secrets/wp_user.txt
+File: /home/fcatala-/inception/secrets/wp_user
 -----------------------------------------------
 editor
 
 
 -----------------------------------------------
-File: /home/fcatala-/inception/secrets/db_root_password.txt
+File: /home/fcatala-/inception/secrets/wp_admin_password
 -----------------------------------------------
-root_pass_secure_2024
+1234
 
 
 -----------------------------------------------
-File: /home/fcatala-/inception/secrets/wp_user_password.txt
------------------------------------------------
-User123!Secure
-
-
------------------------------------------------
-File: /home/fcatala-/inception/secrets/wp_user_email.txt
+File: /home/fcatala-/inception/secrets/wp_user_email
 -----------------------------------------------
 user@fcatala.42.fr
-
-
------------------------------------------------
-File: /home/fcatala-/inception/secrets/wp_admin_email.txt
------------------------------------------------
-admin@fcatala.42.fr
 
 
 -----------------------------------------------
