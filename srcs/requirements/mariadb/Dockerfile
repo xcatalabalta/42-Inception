@@ -3,7 +3,8 @@ FROM alpine:3.21
 # Install MariaDB server and client.
 # The `mariadb` package on Alpine includes both the server and client tools.
 RUN apk update && \
-    apk add --no-cache mariadb
+    apk add --no-cache mariadb mariadb-client mariadb-server-utils \
+    && rm -rf /var/cache/apk/*
 
 # Create necessary directories for MariaDB run files and data, and set correct ownership.
 # MariaDB runs as the 'mysql' user, so these directories must be owned by 'mysql'.

@@ -14,7 +14,7 @@ services:
     networks:
       - inception
     healthcheck:
-      test: ["CMD", "mariadb-admin", "ping", "-h", "localhost", "-u", "root", "-p$$(cat /run/secrets/db_root_password)"]
+      test: ["CMD-SHELL", "/usr/bin/mariadb-admin ping -h localhost -u root -p$$(cat /run/secrets/db_root_password) || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -41,7 +41,8 @@ services:
       mariadb:
         condition: service_healthy
     healthcheck:
-      test: ["CMD-SHELL", "php-fpm82 -t || exit 1"]
+      # We changed the image to PHP 8.3 in the Dockerfile, so we must update the healthcheck
+      test: ["CMD-SHELL", "php-fpm83 -t || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 3
@@ -94,3 +95,4 @@ secrets:
     file: ../secrets/wp_user_password
   wp_user_email:
     file: ../secrets/wp_user_email
+

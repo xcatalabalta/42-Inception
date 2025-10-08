@@ -16,19 +16,18 @@ if [ ! -f /var/lib/mysql/mysql/user.frm ]; then
     mariadb-install-db --user=mysql --datadir="/var/lib/mysql"
 
     # Start the MariaDB server in the background temporarily for setup (using modern command).
-    # --skip-networking prevents external connections during configuration.
     /usr/bin/mariadbd --user=mysql --datadir="/var/lib/mysql" --skip-networking &
     MYSQL_PID=$!
     
-    # Wait a few seconds for the temporary server to start. This is simpler and generally reliable in Docker.
+    # Wait a few seconds for the temporary server to start.
     echo "Waiting for MariaDB server to be ready..."
     sleep 5
     
     echo "MariaDB server started for configuration."
 
     # 3. CONFIGURE DATABASE 
-    # Use the 'mariadb' command for SQL execution (modern client)
-    mariadb -u root <<EOF
+    # FIX: Explicitly connect via Unix socket, mandatory with --skip-networking.
+    /usr/bin/mysql -u root --socket=/run/mysqld/mysqld.sock <<EOF 
 -- Set the root password using the secret file content
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
 
@@ -36,7 +35,7 @@ ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
 CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
 
 -- Create the application user (uses MYSQL_USER from .env)
--- Grant privileges using the secret password
+-- Grant privileges using the secret password. The '%' allows connection from any host (e.g., WordPress container).
 CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
 
