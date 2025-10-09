@@ -4,12 +4,19 @@
 # Compatible with Alpine Linux (ash/busybox)
 # Usage: ./generate_content.sh
 
-OUTPUT_FILE="content.txt"
+NOW=`date '+%Y_%m_%d_%H_%M'`
+OUTPUT_FILE="$NOW.content.txt"
 
 # Clear the output file if it exists
 > "$OUTPUT_FILE"
 
 echo "Generating content.txt..."
+
+# 0. Get the date
+echo "===============================================" >> "$OUTPUT_FILE"
+echo -n "UPDATED AT " >> "$OUTPUT_FILE"; echo $NOW >> "$OUTPUT_FILE"
+echo "===============================================" >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
 
 # 1. Add directory tree
 
@@ -19,7 +26,7 @@ echo "===============================================" >> "$OUTPUT_FILE"
 echo "" >> "$OUTPUT_FILE"
 
 if command -v tree >/dev/null 2>&1; then
-    tree ~/inception >> "$OUTPUT_FILE"
+    tree -a -I '.git' ~/inception >> "$OUTPUT_FILE"
 else
     # Fallback if tree command is not available
     find . -type d | sed 's|[^/]*/|  |g' >> "$OUTPUT_FILE"

@@ -1,5 +1,5 @@
 ===============================================
-UPDATED AT Thu Oct  9 08:57:25 CEST 2025
+UPDATED AT 2025_10_09_09_10
 ===============================================
 
 ===============================================
@@ -7,6 +7,7 @@ DIRECTORY TREE STRUCTURE
 ===============================================
 
 /home/fcatala-/inception
+├── 2025_10_09_09_10.content.txt
 ├── Makefile
 ├── content.txt
 ├── inception.code-workspace
@@ -48,7 +49,7 @@ DIRECTORY TREE STRUCTURE
             └── tools
                 └── entrypoint.sh
 
-15 directories, 26 files
+15 directories, 27 files
 
 
 ===============================================
@@ -58,7 +59,7 @@ RECURSIVE FILE LISTING (ls -laR)
 /home/fcatala-/inception/secrets:
 total 44
 drwx------    2 fcatala- fcatala-      4096 Oct  8 16:15 .
-drwxrwxr-x    5 fcatala- fcatala-      4096 Oct  8 16:27 ..
+drwxrwxr-x    5 fcatala- fcatala-      4096 Oct  9 09:10 ..
 -rw-------    1 fcatala- fcatala-       347 Oct  8 16:16 credentials
 -rw-------    1 fcatala- fcatala-         5 Oct  8 16:23 db_password
 -rw-------    1 fcatala- fcatala-         5 Oct  8 16:23 db_root_password
@@ -71,11 +72,11 @@ drwxrwxr-x    5 fcatala- fcatala-      4096 Oct  8 16:27 ..
 /home/fcatala-/inception/srcs:
 total 52
 drwxrwxr-x    3 fcatala- fcatala-      4096 Oct  8 16:25 .
-drwxrwxr-x    5 fcatala- fcatala-      4096 Oct  8 16:27 ..
+drwxrwxr-x    5 fcatala- fcatala-      4096 Oct  9 09:10 ..
 -rw-r--r--    1 fcatala- fcatala-       211 Oct  7 18:14 .env
 -rw-r--r--    1 fcatala- fcatala-     20907 Oct  7 16:49 content_old.txt
 -rw-r--r--    1 fcatala- fcatala-      2183 Oct  8 16:57 docker-compose.yml
--rwxr-xr-x    1 fcatala- fcatala-      4768 Oct  9 08:57 gen_context.sh
+-rwxr-xr-x    1 fcatala- fcatala-      4807 Oct  9 09:10 gen_context.sh
 drwxrwxr-x    6 fcatala- fcatala-      4096 Aug 26 09:51 requirements
 
 /home/fcatala-/inception/srcs/requirements:
@@ -177,7 +178,8 @@ File: /home/fcatala-/inception/srcs/gen_context.sh
 # Compatible with Alpine Linux (ash/busybox)
 # Usage: ./generate_content.sh
 
-OUTPUT_FILE="content.txt"
+NOW=`date '+%Y_%m_%d_%H_%M'`
+OUTPUT_FILE="$NOW.content.txt"
 
 # Clear the output file if it exists
 > "$OUTPUT_FILE"
@@ -186,7 +188,7 @@ echo "Generating content.txt..."
 
 # 0. Get the date
 echo "===============================================" >> "$OUTPUT_FILE"
-echo -n "UPDATED AT " >> "$OUTPUT_FILE"; date >> "$OUTPUT_FILE"
+echo -n "UPDATED AT " >> "$OUTPUT_FILE"; echo $NOW >> "$OUTPUT_FILE"
 echo "===============================================" >> "$OUTPUT_FILE"
 echo "" >> "$OUTPUT_FILE"
 
