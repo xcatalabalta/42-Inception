@@ -4,39 +4,47 @@
 echo "Starting MariaDB entrypoint as user: $(whoami)"
 
 # 1. READ SECRETS AND SET ENVIRONMENT VARIABLES
-# Read the secret files mounted by Docker Compose secrets feature (requires root access)
 export MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
 export MYSQL_PASSWORD=$(cat /run/secrets/db_password)
 
-# Check if the database has already been initialized
-if [ ! -f /var/lib/mysql/mysql/user.frm ]; then
-    echo "MariaDB data directory not found or not initialized. Initializing database..."
+# Check if the database has already been initialized (use a robust check)
+if [ ! -d /var/lib/mysql/mysql ]; then
+    echo "MariaDB data directory not initialized. Initializing database..."
 
-    # 2. INITIALIZE DATABASE (using modern command)
+    # 2. INITIALIZE DATABASE
     mariadb-install-db --user=mysql --datadir="/var/lib/mysql"
 
-    # Start the MariaDB server in the background temporarily for setup (using modern command).
-    /usr/bin/mariadbd --user=mysql --datadir="/var/lib/mysql" --skip-networking &
+    # Start the MariaDB server in the background temporarily for setup.
+    # We use --skip-bind-address to ensure clean localhost socket connection.
+    /usr/bin/mariadbd --user=mysql --datadir="/var/lib/mysql" --skip-networking --skip-bind-address &
     MYSQL_PID=$!
     
-    # Wait a few seconds for the temporary server to start.
-    echo "Waiting for MariaDB server to be ready..."
-    sleep 5
-    
-    echo "MariaDB server started for configuration."
+    # CRITICAL FIX: Implement a robust readiness check (replaces 'sleep 10')
+    TRIES=0
+    MAX_TRIES=30
+    echo "Waiting for temporary MariaDB server to be ready..."
+    while ! mariadb-admin ping -h localhost --socket=/run/mysqld/mysqld.sock 2>/dev/null; do
+        TRIES=$((TRIES + 1))
+        if [ $TRIES -ge $MAX_TRIES ]; then
+            echo "Error: Temporary MariaDB server failed to start after $MAX_TRIES attempts."
+            kill $MYSQL_PID
+            exit 1
+        fi
+        sleep 1
+    done
+    echo "Temporary MariaDB server is ready for configuration."
 
-    # 3. CONFIGURE DATABASE 
-    # FIX: Explicitly connect via Unix socket, mandatory with --skip-networking.
-    /usr/bin/mysql -u root --socket=/run/mysqld/mysqld.sock <<EOF 
--- Set the root password using the secret file content
+    # 3. CONFIGURE DATABASE (using direct heredoc and the 'mariadb' client)
+    # The -h localhost ensures we use the proper socket connection.
+    /usr/bin/mariadb -u root -h localhost --socket=/run/mysqld/mysqld.sock <<EOF
+-- Set the root password
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
 
--- Create the application database (uses MYSQL_DATABASE from .env)
+-- Create the application database
 CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
 
--- Create the application user (uses MYSQL_USER from .env)
--- Grant privileges using the secret password. The '%' allows connection from any host (e.g., WordPress container).
-CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+-- Create the application user and grant privileges
+CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
 
 -- Remove anonymous users and remote root access for security
@@ -57,4 +65,5 @@ fi
 
 # 4. START THE FINAL SERVER PROCESS
 echo "Starting MariaDB server in production mode..."
-exec /usr/bin/mariadbd --user=mysql --datadir="/var/lib/mysql"
+exec /usr/bin/mariadbd --user=mysql --datadir="/var/lib/mysql" --bind-address=0.0.0.0 --port=3306
+
