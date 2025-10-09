@@ -1,6 +1,7 @@
 FROM alpine:3.21
 
 RUN apk add --no-cache nginx openssl
+RUN apk update && apk add --no-cache wget curl
 RUN mkdir -p /run/nginx /etc/nginx/certs /usr/share/nginx/html
 
 # Remove the default nginx config and use your complete config
