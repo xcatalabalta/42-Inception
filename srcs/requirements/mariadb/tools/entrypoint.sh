@@ -1,50 +1,69 @@
 #!/bin/sh
-set -e
 
-# Load secrets if present
-if [ -f "$MYSQL_PASSWORD_FILE" ]; then
-    export MYSQL_PASSWORD=$(cat "$MYSQL_PASSWORD_FILE")
-fi
-if [ -f "$MYSQL_ROOT_PASSWORD_FILE" ]; then
-    export MYSQL_ROOT_PASSWORD=$(cat "$MYSQL_ROOT_PASSWORD_FILE")
-fi
+# Set the execution context for debugging
+echo "Starting MariaDB entrypoint as user: $(whoami)"
 
-# Check if the database has been initialized
-if [ ! -d "/var/lib/mysql/mysql" ]; then
-    echo "Initializing database..."
-    mariadb-install-db --user=mysql --datadir=/var/lib/mysql > /dev/null
-    
-    # Start temporary server for initialization
-    mariadbd --user=mysql --skip-networking --socket=/tmp/mysql.sock &
-    pid="$!"
-    
-    # Wait for server to start
-    sleep 10
-    
-    # Run initialization commands
-    mariadb --socket=/tmp/mysql.sock << EOF
-CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
--- Create users for both network access (%) and local access (localhost)
-CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
-CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';
+# 1. READ SECRETS AND SET ENVIRONMENT VARIABLES
+export MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
+export MYSQL_PASSWORD=$(cat /run/secrets/db_password)
 
-GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
-GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'localhost';
+# Check if the database has already been initialized (use a robust check)
+if [ ! -d /var/lib/mysql/mysql ]; then
+    echo "MariaDB data directory not initialized. Initializing database..."
+
+    # 2. INITIALIZE DATABASE
+    mariadb-install-db --user=mysql --datadir="/var/lib/mysql"
+
+    # Start the MariaDB server in the background temporarily for setup.
+    # We use --skip-bind-address to ensure clean localhost socket connection.
+    /usr/bin/mariadbd --user=mysql --datadir="/var/lib/mysql" --skip-networking --skip-bind-address &
+    MYSQL_PID=$!
+    
+    # CRITICAL FIX: Implement a robust readiness check (replaces 'sleep 10')
+    TRIES=0
+    MAX_TRIES=30
+    echo "Waiting for temporary MariaDB server to be ready..."
+    while ! mariadb-admin ping -h localhost --socket=/run/mysqld/mysqld.sock 2>/dev/null; do
+        TRIES=$((TRIES + 1))
+        if [ $TRIES -ge $MAX_TRIES ]; then
+            echo "Error: Temporary MariaDB server failed to start after $MAX_TRIES attempts."
+            kill $MYSQL_PID
+            exit 1
+        fi
+        sleep 1
+    done
+    echo "Temporary MariaDB server is ready for configuration."
+
+    # 3. CONFIGURE DATABASE (using direct heredoc and the 'mariadb' client)
+    # The -h localhost ensures we use the proper socket connection.
+    /usr/bin/mariadb -u root -h localhost --socket=/run/mysqld/mysqld.sock <<EOF
+-- Set the root password
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
 
--- Remove anonymous users to prevent authentication conflicts
-DELETE FROM mysql.user WHERE User = '';
-DROP DATABASE IF EXISTS test;
+-- Create the application database
+CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
 
+-- Create the application user and grant privileges
+CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
+
+-- Remove anonymous users and remote root access for security
+DELETE FROM mysql.user WHERE User='';
+DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
+
+-- Apply the changes
 FLUSH PRIVILEGES;
 EOF
-    
-    # Stop temporary server
-    kill "$pid"
-    wait "$pid"
-    
-    echo "Database initialized successfully"
+
+    # Stop the temporary MariaDB server
+    kill $MYSQL_PID
+    wait $MYSQL_PID
+    echo "MariaDB configuration complete. Temporary server stopped."
+else
+    echo "MariaDB data directory already initialized. Skipping initialization..."
 fi
 
-exec mariadbd --user=mysql --console
+# 4. START THE FINAL SERVER PROCESS
+echo "Starting MariaDB server in production mode..."
+exec /usr/bin/mariadbd --user=mysql --datadir="/var/lib/mysql" --bind-address=0.0.0.0 --port=3306
 

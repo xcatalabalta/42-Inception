@@ -1,0 +1,15 @@
+# Secrets
+secrets/*.txt
+
+# Environment files
+srcs/.env
+
+# Data directories
+/home/*/data/
+
+# Docker
+*.log
+
+# OS
+.DS_Store
+.vscode/

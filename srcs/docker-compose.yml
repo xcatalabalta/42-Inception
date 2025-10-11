@@ -6,30 +6,46 @@ services:
     container_name: mariadb
     restart: always
     env_file: .env
+    secrets:
+      - db_password
+      - db_root_password
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
       - inception
-    expose:
-      - "3306"
+    healthcheck:
+      test: ["CMD-SHELL", "/usr/bin/mariadb-admin ping -h localhost -u root -p$$(cat /run/secrets/db_root_password) || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
     restart: always
     env_file: .env
-    environment:
-       MYSQL_HOST: mariadb
-       MYSQL_DATABASE: ${MYSQL_DATABASE}
-       MYSQL_USER: ${MYSQL_USER}
-       MYSQL_PASSWORD: ${MYSQL_PASSWORD}       
+    secrets:
+      - db_password
+      - wp_admin_user
+      - wp_admin_password
+      - wp_admin_email
+      - wp_user
+      - wp_user_password
+      - wp_user_email
     volumes:
       - wordpress_data:/var/www/html
     networks:
       - inception
     depends_on:
-      - mariadb
-    expose:
-      - "9000"
+      mariadb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "php-fpm83 -t || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
 
   nginx:
     build: ./requirements/nginx
@@ -40,17 +56,42 @@ services:
     networks:
       - inception
     depends_on:
-      - wordpress
+      wordpress:
+        condition: service_healthy
     ports:
       - "80:80"
       - "443:443"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sSfk https://localhost/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 
 volumes:
   mariadb_data:
+    driver: local
   wordpress_data:
-
+    driver: local
 
 networks:
- inception:
-   driver: bridge
+  inception:
+    driver: bridge
+
+secrets:
+  db_password:
+    file: ../secrets/db_password
+  db_root_password:
+    file: ../secrets/db_root_password
+  wp_admin_user:
+    file: ../secrets/wp_admin_user
+  wp_admin_password:
+    file: ../secrets/wp_admin_password
+  wp_admin_email:
+    file: ../secrets/wp_admin_email
+  wp_user:
+    file: ../secrets/wp_user
+  wp_user_password:
+    file: ../secrets/wp_user_password
+  wp_user_email:
+    file: ../secrets/wp_user_email
 

@@ -1,50 +1,67 @@
 FROM alpine:3.21
 
-# Install PHP-FPM and required PHP extensions for WordPress
-RUN apk add --no-cache \
-    php82 \
-    php82-fpm \
-    php82-mysqli \
-    php82-json \
-    php82-curl \
-    php82-dom \
-    php82-exif \
-    php82-fileinfo \
-    php82-mbstring \
-    php82-openssl \
-    php82-xml \
-    php82-zip \
-    php82-phar \
-    php82-intl \
-    php82-opcache \
-    php82-session \
-    php82-gd \
+# Install necessary packages: PHP-FPM and required extensions for WordPress on Alpine
+# We add 'shadow' to ensure 'addgroup' and 'adduser' function correctly for custom user creation.
+RUN apk update && \
+    apk add --no-cache \
+    php83 \
+    php83-fpm \
+    php83-mysqli \
+    php83-session \
+    php83-mbstring \
+    php83-curl \
+    php83-dom \
+    php83-xml \
+    php83-simplexml \
+    php83-json \
+    php83-gd \
+    php83-zlib \
+    php83-phar \
     curl \
-    mysql-client
+    tar \
+    shadow \
+    # Clean up apk cache
+    && rm -rf /var/cache/apk/*
 
-# Create symlink for php command (wp-cli expects 'php')
-RUN ln -s /usr/bin/php82 /usr/bin/php
+# Create the base web directory before extraction
+RUN mkdir -p /var/www 
 
-# Create necessary directories
-RUN mkdir -p /var/www/html /run/php
+# Explicitly ensure the www-data group and user exist.
+# The `|| true` makes the command idempotent by ignoring the error if the user/group already exists.
+# We also redirect error output to null (`2>/dev/null`) for cleaner build logs.
+RUN addgroup -S www-data 2>/dev/null || true && \
+    adduser -D -S -G www-data www-data 2>/dev/null || true
 
-# Download wp-cli (WordPress command line tool)
-RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
-    && chmod +x wp-cli.phar \
-    && mv wp-cli.phar /usr/local/bin/wp
+# Download, extract, and move latest WordPress core files using curl (FIXED in Step 8)
+RUN curl -L https://wordpress.org/latest.tar.gz -o /tmp/latest.tar.gz && \
+    tar -xzf /tmp/latest.tar.gz -C /var/www/ && \
+    rm /tmp/latest.tar.gz && \
+    mv /var/www/wordpress /var/www/html
 
-# Copy PHP configuration
-COPY conf/php.ini /etc/php82/conf.d/custom.ini
+# Download and install wp-cli (FIXED in Step 6)
+RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x /usr/local/bin/wp
 
-# Copy PHP-FPM configuration
-COPY conf/my_www.conf /etc/php82/php-fpm.d/www.conf
+# Create the php-fpm run directory and set permissions (SHOULD work now)
+RUN mkdir -p /run/php && \
+    chown -R www-data:www-data /var/www/html
 
-# Copy entrypoint script
-COPY tools/entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Copy configuration files
+COPY conf/my_www.conf /etc/php83/php-fpm.d/www.conf
+COPY conf/php.ini /etc/php83/php.ini
+COPY tools/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-WORKDIR /var/www/html
+# Ensure the entrypoint script is executable
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
+# Expose the default PHP-FPM port
 EXPOSE 9000
 
-ENTRYPOINT ["/entrypoint.sh"]
+# Set the working directory
+WORKDIR /var/www/html
+
+# The entrypoint script will handle wp-config.php generation and start php-fpm
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+# Command to run PHP-FPM in the foreground
+CMD ["php-fpm83", "-F"]
