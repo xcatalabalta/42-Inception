@@ -13,11 +13,15 @@ NC = \033[0m # No Color
 all: build up
 
 # Create necessary directories for volumes
+# added @chmod -R u+w $(DATA_PATH) 2>/dev/null || true
+# added @chmod -R u+w secrets 2>/dev/null || true
 setup:
 	@echo "$(YELLOW)Creating data directories...$(NC)"
 	@mkdir -p $(DATA_PATH)/mariadb
 	@mkdir -p $(DATA_PATH)/wordpress
 	@mkdir -p secrets
+	@chmod -R u+w $(DATA_PATH) 2>/dev/null || true
+	@chmod -R u+w secrets 2>/dev/null || true
 	@echo "$(GREEN)Setup complete!$(NC)"
 
 # Build all containers
@@ -45,11 +49,18 @@ clean: down
 	@echo "$(GREEN)Clean complete!$(NC)"
 
 # Full clean including volumes data
+# added @mkdir -p $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress
+# added @chmod -R u+w $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress 2>/dev/null || true
+# changed @sudo rm -rf $(DATA_PATH)/mariadb/*
+# to @rm -rf $(DATA_PATH)/mariadb/*
+# changed @sudo rm -rf $(DATA_PATH)/wordpress/*
+# to @rm -rf $(DATA_PATH)/wordpress/*
 fclean: clean
 	@echo "$(RED)Removing all data...$(NC)"
-	@sudo rm -rf $(DATA_PATH)/mariadb/*
-	@sudo rm -rf $(DATA_PATH)/wordpress/*
-	@docker system prune -af --volumes
+	@mkdir -p $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress
+	@rm -rf $(DATA_PATH)/mariadb/* 2>/dev/null || true
+	@rm -rf $(DATA_PATH)/wordpress/* 2>/dev/null || true
+	@docker system prune -af --volumes > /dev/null 2>&1 || true
 	@echo "$(GREEN)Full clean complete!$(NC)"
 
 # Rebuild everything
