@@ -10,11 +10,9 @@ RED = \033[0;31m
 YELLOW = \033[0;33m
 NC = \033[0m # No Color
 
-all: build up
+all: build up help
 
 # Create necessary directories for volumes
-# added @chmod -R u+w $(DATA_PATH) 2>/dev/null || true
-# added @chmod -R u+w secrets 2>/dev/null || true
 setup:
 	@echo -e "$(YELLOW)Creating data directories...$(NC)"
 	@mkdir -p $(DATA_PATH)/mariadb
@@ -23,7 +21,7 @@ setup:
 	@chmod -R u+w $(DATA_PATH) 2>/dev/null || true
 	@chmod -R u+w secrets 2>/dev/null || true
 	@echo -e "$(GREEN)Setup complete!$(NC)"
-
+	
 # Build all containers
 build: setup
 	@echo -e "$(YELLOW)Building containers...$(NC)"
@@ -34,7 +32,6 @@ build: setup
 up:
 	@echo -e "$(YELLOW)Starting containers...$(NC)"
 	@docker-compose -f $(COMPOSE_FILE) up -d
-	@echo -e "$(GREEN)Containers started!$(NC)"
 
 # Stop all containers
 down:
@@ -58,6 +55,22 @@ fclean: clean
 	@chown -R $(USER):$(USER) $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress 2>/dev/null || true
 	@docker system prune -af --volumes > /dev/null 2>&1 || true
 	@echo -e "$(GREEN)Full clean complete!$(NC)"
+	docker ps
+	@if [ `docker ps | wc -l` -eq 1 ]; then echo -e "$(GREEN)No dockers available!$(NC)"; \
+	else echo -e "$(RED)Some containers still running! :-($(NC)"; \
+	fi
+	docker volume ls
+	@if [ `docker volume ls | wc -l` -eq 1 ]; then echo -e "$(GREEN)No volumes available!$(NC)"; \
+	else echo -e "$(RED)Some volumes remain! :-($(NC)"; \
+	fi
+	docker image ls
+	@if [ `docker image ls | wc -l` -eq 1 ]; then echo -e "$(GREEN)All images removed!$(NC)"; \
+	else echo -e "$(RED)Some images remain! :-($(NC)"; \
+	fi
+	docker network ls
+	@if [ `docker network ls | wc -l` -eq 4 ]; then echo -e "$(GREEN)All project networks removed!$(NC)"; \
+	else echo -e "$(RED)Network remain! :-($(NC)"; \
+	fi
 
 # Rebuild everything
 re: fclean all
@@ -82,5 +95,7 @@ help:
 	@echo "  make re     - Rebuild everything from scratch"
 	@echo "  make logs   - Show container logs"
 	@echo "  make ps     - Show container status"
+	@echo -e "Secrets ready in $(GREEN)./secrets\nFeel free to edit their content.$(NC)"
+	@ls -la ./secrets
 
 .PHONY: all build up down clean fclean re logs ps
