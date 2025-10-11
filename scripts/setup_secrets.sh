@@ -134,11 +134,47 @@ done
 
 # WordPress editor
 echo ""
+CONTROL=0
 echo "=== WordPress Editor User ==="
-read -p "Editor username: " WP_USER
-read -p "Editor password: " -s WP_USER_PASS
+echo "⚠️  Username must a single word"
+while [ $CONTROL == 0 ]; do
+	read -p "Username (editor): " WP_USER
+	if [ `echo $WP_ADMIN_USER | wc -w` -eq 0 ]; then
+		echo "Error: Username cannot be empty!"
+	elif [ `echo $WP_ADMIN_USER | wc -w` -gt 1 ]; then
+		echo "Error: Username must be a single word"
+	else
+		CONTROL=1
+	fi
+done
+CONTROL=0
+while [ $CONTROL == 0 ]; do
+	
+	echo -en "WP ${GREEN}User (editor)${NC} password: "
+	read -s WP_USER_PASS
+	if [ ${#WP_ADMIN_PASS} -ge 5 ]; then
+		CONTROL=1
+	else
+		echo "⚠️  Passwords must be minimum 5 characters."
+	fi
+done
 echo ""
-read -p "Editor email: " WP_USER_EMAIL
+CONTROL=0
+while [ $CONTROL -eq 0 ]; do
+    read -p "User (editor) email: " WP_USER_EMAIL
+    
+    if [[ -z "$WP_USER_EMAIL" ]]; then
+        echo -e "${RED}✗ Email cannot be empty.${NC}"
+        continue
+    fi
+    
+    if validate_strict_wordpress_email "$WP_USER_EMAIL"; then
+        echo -e "${GREEN}✓ Valid email format${NC}"
+        CONTROL=1
+    else
+        echo -e "${RED}✗ Invalid email format. Please try again (example: user@example.com).${NC}"
+    fi
+done
 
 # Write secrets
 echo ""

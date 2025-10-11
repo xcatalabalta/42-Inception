@@ -14,7 +14,7 @@ NC = \033[0m # No Color
 all: build up help
 
 # Create necessary directories for volumes
-setup:
+setup: setup-secrets
 	@echo -e "$(YELLOW)Creating data directories...$(NC)"
 	@mkdir -p $(DATA_PATH)/mariadb
 	@mkdir -p $(DATA_PATH)/wordpress
@@ -23,14 +23,22 @@ setup:
 	@echo -e "$(GREEN)Setup complete!$(NC)"
 
 # Setup secrets with user input
-check-secrets:
+setup-secrets:
 	@if [ -d $(SECRETS_DIR) ]; \
 		then \
 		echo -e "$(RED)⚠️  Secrets already exist in ./$(SECRETS_DIR)/$(NC)"; \
 		echo -e "$(YELLOW)Please remove the directory to recreate: rm -rf $(SECRETS_DIR)$(NC)"; \
 		exit 1; \
 	fi
-
+	@echo -e "$(YELLOW)=== Inception Secrets Setup ===$(NC)"
+	@mkdir -p $(SECRETS_DIR)
+	@chmod 700 $(SECRETS_DIR)
+	@echo ""
+	@./scripts/setup_secrets.sh
+	@chmod 600 $(SECRETS_DIR)/*
+	@echo ""
+	@echo -e "$(GREEN)✅ Secrets created successfully!$(NC)"
+	@echo -e "$(YELLOW)⚠️  Keep ./$(SECRETS_DIR)/ safe and never commit to Git!$(NC)"
 
 # Build all containers
 build: setup
@@ -62,6 +70,7 @@ fclean: clean
 	@chmod -R u+w $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress 2>/dev/null || true
 	@rm -rf $(DATA_PATH)/mariadb/* 2>/dev/null || true
 	@rm -rf $(DATA_PATH)/wordpress/* 2>/dev/null || true
+	@rm -rf $(SECRETS_DIR)
 	@chown -R $(USER):$(USER) $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress 2>/dev/null || true
 	@docker system prune -af --volumes > /dev/null 2>&1 || true
 	@echo -e "$(GREEN)Full clean complete!$(NC)"
