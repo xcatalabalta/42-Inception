@@ -3,6 +3,7 @@
 # Variables
 COMPOSE_FILE = srcs/docker-compose.yml
 DATA_PATH = /home/$(USER)/data
+SECRETS_DIR = secrets
 
 # Colors for output
 GREEN = \033[0;32m
@@ -17,11 +18,20 @@ setup:
 	@echo -e "$(YELLOW)Creating data directories...$(NC)"
 	@mkdir -p $(DATA_PATH)/mariadb
 	@mkdir -p $(DATA_PATH)/wordpress
-	@mkdir -p secrets
 	@chmod -R u+w $(DATA_PATH) 2>/dev/null || true
 	@chmod -R u+w secrets 2>/dev/null || true
 	@echo -e "$(GREEN)Setup complete!$(NC)"
-	
+
+# Setup secrets with user input
+check-secrets:
+	@if [ -d $(SECRETS_DIR) ]; \
+		then \
+		echo -e "$(RED)⚠️  Secrets already exist in ./$(SECRETS_DIR)/$(NC)"; \
+		echo -e "$(YELLOW)Please remove the directory to recreate: rm -rf $(SECRETS_DIR)$(NC)"; \
+		exit 1; \
+	fi
+
+
 # Build all containers
 build: setup
 	@echo -e "$(YELLOW)Building containers...$(NC)"
@@ -95,7 +105,5 @@ help:
 	@echo "  make re     - Rebuild everything from scratch"
 	@echo "  make logs   - Show container logs"
 	@echo "  make ps     - Show container status"
-	@echo -e "Secrets ready in $(GREEN)./secrets\nFeel free to edit their content.$(NC)"
-	@ls -la ./secrets
 
-.PHONY: all build up down clean fclean re logs ps
+.PHONY: all build up down clean fclean re logs ps setup-secrets

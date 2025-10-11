@@ -40,9 +40,11 @@ echo "===============================================" >> "$OUTPUT_FILE"
 echo "RECURSIVE FILE LISTING (ls -laR)" >> "$OUTPUT_FILE"
 echo "===============================================" >> "$OUTPUT_FILE"
 echo "" >> "$OUTPUT_FILE"
+ls -laR ~/inception/scripts >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
 ls -laR ~/inception/secrets >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
 ls -laR ~/inception/srcs >> "$OUTPUT_FILE"
-
 echo "" >> "$OUTPUT_FILE"
 echo "" >> "$OUTPUT_FILE"
 
@@ -126,6 +128,41 @@ echo "-----------------------------------------------" >> "$OUTPUT_FILE"
 
 cat ~/inception/Makefile >> "$OUTPUT_FILE"
 
+echo "" >> "$OUTPUT_FILE"
 
+echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+echo "Scripts" >> "$OUTPUT_FILE"
+echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+find ~/inception/scripts -type f ! -name "$OUTPUT_FILE" | while read -r file; do
+    echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+    echo "File: $file" >> "$OUTPUT_FILE"
+    echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+    
+    # Check if file is readable
+    if [ -r "$file" ]; then
+        # Try to detect binary files - Alpine compatible method
+        if command -v file >/dev/null 2>&1; then
+            # If 'file' command exists, use it
+            if file "$file" | grep -q "text"; then
+                cat "$file" >> "$OUTPUT_FILE"
+            else
+                echo "[Binary file - content not displayed]" >> "$OUTPUT_FILE"
+            fi
+        else
+            # Fallback: try to read the file, but be aware it might be binary
+            # Check for null bytes as indicator of binary content
+            if grep -q '\x00' "$file" 2>/dev/null; then
+                echo "[Binary file detected - content not displayed]" >> "$OUTPUT_FILE"
+            else
+                cat "$file" >> "$OUTPUT_FILE"
+            fi
+        fi
+    else
+        echo "[File not readable - permission denied]" >> "$OUTPUT_FILE"
+    fi
+    
+    echo "" >> "$OUTPUT_FILE"
+done
 
 echo "Content generation complete! Output saved to $OUTPUT_FILE"
