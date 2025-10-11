@@ -147,6 +147,7 @@ while [ $CONTROL == 0 ]; do
 		CONTROL=1
 	fi
 done
+
 CONTROL=0
 while [ $CONTROL == 0 ]; do
 	
@@ -159,6 +160,7 @@ while [ $CONTROL == 0 ]; do
 	fi
 done
 echo ""
+
 CONTROL=0
 while [ $CONTROL -eq 0 ]; do
     read -p "User (editor) email: " WP_USER_EMAIL
@@ -192,7 +194,6 @@ echo -n "$WP_USER_EMAIL" > "$SECRETS_DIR/wp_user_email"
 # Create credentials reference
 cat > "$SECRETS_DIR/credentials" << EOF
 # Inception Project Credentials Reference
-# DO NOT commit this file to Git!
 
 Database:
   User: wp_user
