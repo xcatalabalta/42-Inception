@@ -32,7 +32,7 @@ RUN mkdir -p /var/www
 RUN addgroup -S www-data 2>/dev/null || true && \
     adduser -D -S -G www-data www-data 2>/dev/null || true
 
-# Download, extract, and move latest WordPress core files using curl (FIXED in Step 8)
+# Download, extract, and move latest WordPress core files using curl
 RUN curl -L https://wordpress.org/latest.tar.gz -o /tmp/latest.tar.gz && \
     tar -xzf /tmp/latest.tar.gz -C /var/www/ && \
     rm /tmp/latest.tar.gz && \
@@ -42,7 +42,7 @@ RUN curl -L https://wordpress.org/latest.tar.gz -o /tmp/latest.tar.gz && \
 RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
     chmod +x /usr/local/bin/wp
 
-# Create the php-fpm run directory and set permissions (SHOULD work now)
+# Create the php-fpm run directory and set permissions
 RUN mkdir -p /run/php && \
     chown -R www-data:www-data /var/www/html
 

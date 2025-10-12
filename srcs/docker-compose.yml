@@ -67,6 +67,20 @@ services:
       timeout: 5s
       retries: 3
 
+  adminer:
+    build:
+      context: ./requirements/adminer
+      dockerfile: Dockerfile
+    container_name: adminer
+    restart: unless-stopped
+    ports:
+      - "8080:8080"               # Expose to host for evaluator browser access
+    networks:
+      - inception                 # use the same network you already use (e.g. inception)
+    depends_on:
+      - mariadb
+
+
 volumes:
   mariadb_data:
     driver: local

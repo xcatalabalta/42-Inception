@@ -11,6 +11,8 @@ RED = \033[0;31m
 YELLOW = \033[0;33m
 NC = \033[0m # No Color
 
+bonus: all
+
 all: build up
 
 # Create necessary directories for volumes
@@ -18,6 +20,7 @@ setup: setup-secrets
 	@echo -e "$(YELLOW)Creating data directories...$(NC)"
 	@mkdir -p $(DATA_PATH)/mariadb
 	@mkdir -p $(DATA_PATH)/wordpress
+	@mkdir -p $(DATA_PATH)/adminer
 	@chmod -R u+w $(DATA_PATH) 2>/dev/null || true
 	@chmod -R u+w secrets 2>/dev/null || true
 	@echo -e "$(GREEN)Setup complete!$(NC)"
@@ -65,12 +68,13 @@ clean: down
 # Full clean including volumes data
 fclean: clean
 	@echo -e "$(RED)Removing all data...$(NC)"
-	@mkdir -p $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress
-	@chmod -R u+w $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress 2>/dev/null || true
+	@mkdir -p $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress $(DATA_PATH)/adminer
+	@chmod -R u+w $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress $(DATA_PATH)/adminer 2>/dev/null || true
 	@rm -rf $(DATA_PATH)/mariadb/* 2>/dev/null || true
 	@rm -rf $(DATA_PATH)/wordpress/* 2>/dev/null || true
+	@rm -rf $(DATA_PATH)/adminer/* 2>/dev/null || true
 	@rm -rf $(SECRETS_DIR)
-	@chown -R $(USER):$(USER) $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress 2>/dev/null || true
+	@chown -R $(USER):$(USER) $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress $(DATA_PATH)/adminer 2>/dev/null || true
 	@docker system prune -af --volumes > /dev/null 2>&1 || true
 	@echo -e "$(GREEN)Full clean complete!$(NC)"
 	@if [ -z "$$(docker ps -q)" ]; then \
@@ -114,4 +118,4 @@ help:
 	@echo "  make up     - Start all containers"
 
 
-.PHONY: all build up down clean fclean re logs ps setup-secrets setup
+.PHONY: all bonus build up down clean fclean re logs ps setup-secrets setup
