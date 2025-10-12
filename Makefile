@@ -20,17 +20,32 @@ setup: setup-secrets
 	@echo -e "$(YELLOW)Creating data directories...$(NC)"
 	@mkdir -p $(DATA_PATH)/mariadb
 	@mkdir -p $(DATA_PATH)/wordpress
-	@mkdir -p $(DATA_PATH)/adminer
+#	@mkdir -p $(DATA_PATH)/adminer
 	@chmod -R u+w $(DATA_PATH) 2>/dev/null || true
 	@chmod -R u+w secrets 2>/dev/null || true
 	@echo -e "$(GREEN)Setup complete!$(NC)"
 
 # Setup secrets with user input
 setup-secrets:
-	@if [ -d $(SECRETS_DIR) ]; then \
-		echo -e "$(YELLOW)⚠️  Secrets already exist in ./$(SECRETS_DIR)/$(NC) Skipping creation"; \
+	@MISSING=0; \
+	if [ ! -d $(SECRETS_DIR) ]; then \
+		MISSING=1; \
+	else \
+		for file in db_password db_root_password wp_admin_user wp_admin_password wp_admin_email wp_user wp_user_password wp_user_email; do \
+			if [ ! -f $(SECRETS_DIR)/$$file ] || [ ! -s $(SECRETS_DIR)/$$file ]; then \
+				MISSING=3; \
+				break; \
+			fi; \
+		done; \
+	fi; \
+	if [ $$MISSING -eq 0 ]; then \
+		echo -e "$(GREEN)All secrets already configured in ./$(SECRETS_DIR)/$(NC) Skipping creation"; \
 	else \
 		echo -e "$(YELLOW)=== Inception Secrets Setup ===$(NC)"; \
+		if [ $$MISSING -gt 1 ]; then \
+			echo -e "$(RED)All secrets will be overwritten$(NC)";\
+			sleep 2; \
+		fi; \
 		mkdir -p $(SECRETS_DIR); \
 		chmod 700 $(SECRETS_DIR); \
 		echo ""; \
@@ -40,7 +55,6 @@ setup-secrets:
 		echo -e "$(GREEN)✅ Secrets created successfully!$(NC)"; \
 		echo -e "$(YELLOW)⚠️  Keep ./$(SECRETS_DIR)/ safe$(NC)"; \
 	fi
-
 
 # Build all containers
 build: setup

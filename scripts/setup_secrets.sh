@@ -13,11 +13,16 @@ validate_strict_wordpress_email() {
     local email="$1"
     local EMAIL_REGEX="^[A-Za-z0-9.!#$%&'*+/=?^\`{|}~-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
     # More practical strict validation
+        if [[ ${#email} -lt 6 ]]; then
+        echo -e "${RED}✗ email too short${NC}"
+        return 1
+    fi
+    
     if [[ ! "$email" =~ $EMAIL_REGEX ]]; then
         echo -e "${RED}✗ Invalid email format${NC}"
         return 1
     fi
-    
+
     # WordPress-specific validations
     if [[ "$email" =~ \\.\\. ]]; then
         echo -e "${RED}✗ Email cannot contain consecutive dots${NC}"
@@ -41,16 +46,25 @@ validate_strict_wordpress_email() {
         echo -e "${RED}✗ Domain part too long${NC}"
         return 1
     fi
-    
+
     if [[ "$domain_part" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
         echo -e "${RED}✗ IP addresses not allowed in email domain${NC}"
         return 1
     fi
     
+    delimiter="."
+    IFS="$delimiter"
+    for sub in $domain_part; do
+        if [[ "$sub" =~ [-]$ || "$sub" =~ ^[-] ]]; then
+            echo -e "${RED}✗ Hyphen not allowed at ${sub} ${NC}"
+        return 1
+        fi
+    done
+
     return 0
 }
-
-echo "This script will create secret files for the Inception project."
+# clear
+echo "Now you are going to create the secret files for the Inception project."
 echo "Passwords will not be displayed while typing."
 echo ""
 
@@ -128,7 +142,7 @@ while [ $CONTROL -eq 0 ]; do
         echo -e "${GREEN}✓ Valid email format${NC}"
         CONTROL=1
     else
-        echo -e "${RED}✗ Invalid email format. Please try again (example: admin@example.com).${NC}"
+        echo -e "${RED}✗ Please try again (example: admin@example.com).${NC}"
     fi
 done
 
@@ -153,7 +167,7 @@ while [ $CONTROL == 0 ]; do
 	
 	echo -en "WP ${GREEN}User (editor)${NC} password: "
 	read -s WP_USER_PASS
-	if [ ${#WP_ADMIN_PASS} -ge 5 ]; then
+	if [ ${#WP_USER_PASS} -ge 5 ]; then
 		CONTROL=1
 	else
 		echo "⚠️  Passwords must be minimum 5 characters."
