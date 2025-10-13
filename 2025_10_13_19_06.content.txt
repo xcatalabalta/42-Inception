@@ -1,0 +1,1521 @@
+===============================================
+UPDATED AT 2025_10_13_19_06
+===============================================
+
+===============================================
+DIRECTORY TREE STRUCTURE
+===============================================
+
+/home/fcatala-/inception
+├── .gitignore
+├── 2025_10_11_18_34.content.txt
+├── 2025_10_12_12_27.content.txt
+├── 2025_10_13_19_06.content.txt
+├── Makefile
+├── inception.code-workspace
+├── scripts
+│   ├── gen_context.sh
+│   └── setup_secrets.sh
+├── secrets
+│   ├── credentials
+│   ├── db_password
+│   ├── db_root_password
+│   ├── wp_admin_email
+│   ├── wp_admin_password
+│   ├── wp_admin_user
+│   ├── wp_user
+│   ├── wp_user_email
+│   └── wp_user_password
+└── srcs
+    ├── .env
+    ├── docker-compose.yml
+    └── requirements
+        ├── adminer
+        │   ├── .dockerignore
+        │   └── Dockerfile
+        ├── mariadb
+        │   ├── .dockerignore
+        │   ├── Dockerfile
+        │   ├── conf
+        │   │   └── my.cnf
+        │   └── tools
+        │       └── entrypoint.sh
+        ├── nginx
+        │   ├── .dockerignore
+        │   ├── Dockerfile
+        │   ├── conf
+        │   │   └── my_nginx.conf
+        │   ├── html
+        │   │   └── index.html
+        │   └── tools
+        │       └── entrypoint.sh
+        ├── tools
+        └── wordpress
+            ├── .dockerignore
+            ├── Dockerfile
+            ├── conf
+            │   ├── my_www.conf
+            │   └── php.ini
+            └── tools
+                └── entrypoint.sh
+
+17 directories, 35 files
+
+
+===============================================
+RECURSIVE FILE LISTING (ls -laR)
+===============================================
+
+/home/fcatala-/inception/scripts:
+total 24
+drwxr-xr-x    2 fcatala- fcatala-      4096 Oct 11 13:36 .
+drwxrwxr-x    6 fcatala- fcatala-      4096 Oct 13 19:06 ..
+-rwxr-xr-x    1 fcatala- fcatala-      6376 Oct 11 14:00 gen_context.sh
+-rwxr-xr-x    1 fcatala- fcatala-      5768 Oct 13 17:31 setup_secrets.sh
+
+/home/fcatala-/inception/secrets:
+total 44
+drwx------    2 fcatala- fcatala-      4096 Oct 13 19:01 .
+drwxrwxr-x    6 fcatala- fcatala-      4096 Oct 13 19:06 ..
+-rw-------    1 fcatala- fcatala-       364 Oct 13 19:01 credentials
+-rw-------    1 fcatala- fcatala-         8 Oct 13 19:01 db_password
+-rw-------    1 fcatala- fcatala-         5 Oct 13 19:01 db_root_password
+-rw-------    1 fcatala- fcatala-         8 Oct 13 19:01 wp_admin_email
+-rw-------    1 fcatala- fcatala-         5 Oct 13 19:01 wp_admin_password
+-rw-------    1 fcatala- fcatala-         5 Oct 13 19:01 wp_admin_user
+-rw-------    1 fcatala- fcatala-         6 Oct 13 19:01 wp_user
+-rw-------    1 fcatala- fcatala-         8 Oct 13 19:01 wp_user_email
+-rw-------    1 fcatala- fcatala-         6 Oct 13 19:01 wp_user_password
+
+/home/fcatala-/inception/srcs:
+total 20
+drwxrwxr-x    3 fcatala- fcatala-      4096 Oct 11 13:55 .
+drwxrwxr-x    6 fcatala- fcatala-      4096 Oct 13 19:06 ..
+-rw-r--r--    1 fcatala- fcatala-       224 Oct 12 06:04 .env
+-rw-r--r--    1 fcatala- fcatala-      2451 Oct 13 17:06 docker-compose.yml
+drwxrwxr-x    7 fcatala- fcatala-      4096 Oct 12 08:33 requirements
+
+/home/fcatala-/inception/srcs/requirements:
+total 28
+drwxrwxr-x    7 fcatala- fcatala-      4096 Oct 12 08:33 .
+drwxrwxr-x    3 fcatala- fcatala-      4096 Oct 11 13:55 ..
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct 12 08:43 adminer
+drwxrwxr-x    4 fcatala- fcatala-      4096 Oct 11 08:37 mariadb
+drwxrwxr-x    5 fcatala- fcatala-      4096 Oct 11 08:37 nginx
+drwxrwxr-x    2 fcatala- fcatala-      4096 Sep 10 16:38 tools
+drwxrwxr-x    4 fcatala- fcatala-      4096 Oct 11 08:37 wordpress
+
+/home/fcatala-/inception/srcs/requirements/adminer:
+total 12
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct 12 08:43 .
+drwxrwxr-x    7 fcatala- fcatala-      4096 Oct 12 08:33 ..
+-rw-r--r--    1 fcatala- fcatala-         0 Oct 12 08:42 .dockerignore
+-rw-r--r--    1 fcatala- fcatala-       791 Oct 12 09:08 Dockerfile
+
+/home/fcatala-/inception/srcs/requirements/mariadb:
+total 24
+drwxrwxr-x    4 fcatala- fcatala-      4096 Oct 11 08:37 .
+drwxrwxr-x    7 fcatala- fcatala-      4096 Oct 12 08:33 ..
+-rw-r--r--    1 fcatala- fcatala-        21 Oct 11 08:37 .dockerignore
+-rw-r--r--    1 fcatala- fcatala-      1058 Oct 11 08:37 Dockerfile
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct 11 08:37 conf
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct 11 08:37 tools
+
+/home/fcatala-/inception/srcs/requirements/mariadb/conf:
+total 12
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct 11 08:37 .
+drwxrwxr-x    4 fcatala- fcatala-      4096 Oct 11 08:37 ..
+-rw-r--r--    1 fcatala- fcatala-       686 Oct 13 18:26 my.cnf
+
+/home/fcatala-/inception/srcs/requirements/mariadb/tools:
+total 12
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct 11 08:37 .
+drwxrwxr-x    4 fcatala- fcatala-      4096 Oct 11 08:37 ..
+-rwxr-xr-x    1 fcatala- fcatala-      2812 Oct 13 18:57 entrypoint.sh
+
+/home/fcatala-/inception/srcs/requirements/nginx:
+total 28
+drwxrwxr-x    5 fcatala- fcatala-      4096 Oct 11 08:37 .
+drwxrwxr-x    7 fcatala- fcatala-      4096 Oct 12 08:33 ..
+-rw-r--r--    1 fcatala- fcatala-        20 Oct 12 09:21 .dockerignore
+-rw-r--r--    1 fcatala- fcatala-       482 Oct 11 08:37 Dockerfile
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 conf
+drwxr-xr-x    2 fcatala- fcatala-      4096 Sep 10 16:27 html
+drwxrwxr-x    2 fcatala- fcatala-      4096 Sep 10 16:38 tools
+
+/home/fcatala-/inception/srcs/requirements/nginx/conf:
+total 12
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  7 16:22 .
+drwxrwxr-x    5 fcatala- fcatala-      4096 Oct 11 08:37 ..
+-rw-r--r--    1 fcatala- fcatala-      1626 Oct  9 13:25 my_nginx.conf
+
+/home/fcatala-/inception/srcs/requirements/nginx/html:
+total 12
+drwxr-xr-x    2 fcatala- fcatala-      4096 Sep 10 16:27 .
+drwxrwxr-x    5 fcatala- fcatala-      4096 Oct 11 08:37 ..
+-rw-r--r--    1 fcatala- fcatala-       170 Sep 10 16:31 index.html
+
+/home/fcatala-/inception/srcs/requirements/nginx/tools:
+total 12
+drwxrwxr-x    2 fcatala- fcatala-      4096 Sep 10 16:38 .
+drwxrwxr-x    5 fcatala- fcatala-      4096 Oct 11 08:37 ..
+-rw-r--r--    1 fcatala- fcatala-       438 Sep 10 17:46 entrypoint.sh
+
+/home/fcatala-/inception/srcs/requirements/tools:
+total 8
+drwxrwxr-x    2 fcatala- fcatala-      4096 Sep 10 16:38 .
+drwxrwxr-x    7 fcatala- fcatala-      4096 Oct 12 08:33 ..
+
+/home/fcatala-/inception/srcs/requirements/wordpress:
+total 20
+drwxrwxr-x    4 fcatala- fcatala-      4096 Oct 11 08:37 .
+drwxrwxr-x    7 fcatala- fcatala-      4096 Oct 12 08:33 ..
+-rw-r--r--    1 fcatala- fcatala-         0 Jul 29 16:54 .dockerignore
+-rw-r--r--    1 fcatala- fcatala-      2114 Oct 12 08:50 Dockerfile
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  5 12:36 conf
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct 11 08:37 tools
+
+/home/fcatala-/inception/srcs/requirements/wordpress/conf:
+total 16
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct  5 12:36 .
+drwxrwxr-x    4 fcatala- fcatala-      4096 Oct 11 08:37 ..
+-rw-r--r--    1 fcatala- fcatala-       211 Oct  5 11:01 my_www.conf
+-rw-r--r--    1 fcatala- fcatala-        91 Oct  5 12:36 php.ini
+
+/home/fcatala-/inception/srcs/requirements/wordpress/tools:
+total 12
+drwxrwxr-x    2 fcatala- fcatala-      4096 Oct 11 08:37 .
+drwxrwxr-x    4 fcatala- fcatala-      4096 Oct 11 08:37 ..
+-rwxr-xr-x    1 fcatala- fcatala-      3872 Oct 13 19:00 entrypoint.sh
+
+
+===============================================
+FILE CONTENTS
+===============================================
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/.env
+-----------------------------------------------
+# Database Configuration
+MYSQL_DATABASE=wordpress
+MYSQL_USER=wp_user
+MYSQL_HOST=mariadb
+
+# WordPress Configuration
+WP_TITLE=The Wonderful World of Inception
+WP_URL=https://fcatala-.42.fr
+
+# Domain
+DOMAIN_NAME=fcatala-.42.fr
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/docker-compose.yml
+-----------------------------------------------
+# version: "3.8"
+
+services:
+  mariadb:
+    build: ./requirements/mariadb
+    container_name: mariadb_XC
+    restart: always
+    env_file: .env
+    secrets:
+      - db_password
+      - db_root_password
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD-SHELL", "/usr/bin/mariadb-admin ping -h localhost -u root -p$$(cat /run/secrets/db_root_password) || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  wordpress:
+    build: ./requirements/wordpress
+    container_name: wordpress_XC
+    restart: always
+    env_file: .env
+    secrets:
+      - db_password
+      - wp_admin_user
+      - wp_admin_password
+      - wp_admin_email
+      - wp_user
+      - wp_user_password
+      - wp_user_email
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - inception
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "php-fpm83 -t || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+  nginx:
+    build: ./requirements/nginx
+    container_name: nginx_XC
+    restart: always
+    volumes:
+      - wordpress_data:/var/www/html
+    networks:
+      - inception
+    depends_on:
+      wordpress:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -sSfk https://localhost/ || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  adminer:
+    build:
+      context: ./requirements/adminer
+      dockerfile: Dockerfile
+    container_name: adminer_XC
+    restart: unless-stopped
+    ports:
+      - "8080:8080"               # Expose to host for evaluator browser access
+    networks:
+      - inception                 # use the same network you already use (e.g. inception)
+    depends_on:
+      - mariadb
+
+
+volumes:
+  mariadb_data:
+    driver: local
+  wordpress_data:
+    driver: local
+
+networks:
+  inception:
+    driver: bridge
+
+secrets:
+  db_password:
+    file: ../secrets/db_password
+  db_root_password:
+    file: ../secrets/db_root_password
+  wp_admin_user:
+    file: ../secrets/wp_admin_user
+  wp_admin_password:
+    file: ../secrets/wp_admin_password
+  wp_admin_email:
+    file: ../secrets/wp_admin_email
+  wp_user:
+    file: ../secrets/wp_user
+  wp_user_password:
+    file: ../secrets/wp_user_password
+  wp_user_email:
+    file: ../secrets/wp_user_email
+
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/adminer/Dockerfile
+-----------------------------------------------
+# Adminer (single-file DB management tool) - Alpine + PHP
+FROM alpine:3.21
+
+# Install PHP and required extensions for Adminer
+RUN apk add --no-cache \
+    php83 \
+    php83-session \
+    php83-mysqli \
+    php83-phar \
+    php83-json \
+    php83-mbstring \
+    wget \
+    ca-certificates
+
+# Create directory for Adminer
+RUN mkdir -p /var/www/html
+
+WORKDIR /var/www/html
+
+# Download a stable Adminer release and save as index.php
+# (Using a specific release URL avoids unexpected breaking changes)
+RUN wget -q -O index.php \
+    https://github.com/vrana/adminer/releases/download/v4.8.1/adminer-4.8.1.php
+
+# Expose non-HTTPS port (Adminer is accessed via browser on this port)
+EXPOSE 8080
+
+# Use PHP built-in server to serve Adminer
+CMD ["php83", "-S", "0.0.0.0:8080", "-t", "/var/www/html"]
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/adminer/.dockerignore
+-----------------------------------------------
+[Binary file - content not displayed]
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/nginx/html/index.html
+-----------------------------------------------
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>fcatala-.42.fr</title></head>
+  <body>
+    <h1>Hello from Nginx on fcatala-.42.fr 🚀</h1>
+  </body>
+</html>
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/nginx/conf/my_nginx.conf
+-----------------------------------------------
+# events {
+#     worker_connections 1024;
+# }
+
+# http {
+#     # Redirect HTTP to HTTPS
+#     server {
+#         listen 80;
+#         server_name fcatala-.42.fr;
+#         return 301 https://$host$request_uri;
+#     }
+
+#     # HTTPS server
+#     server {
+#         listen 443 ssl;
+#         server_name fcatala-.42.fr;
+
+#         ssl_certificate     /etc/nginx/certs/nginx.crt;
+#         ssl_certificate_key /etc/nginx/certs/nginx.key;
+
+#         root /usr/share/nginx/html;
+#         index index.html;
+
+#         location / {
+#             try_files $uri $uri/ =404;
+#         }
+#     }
+# }
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    # Redirect HTTP to HTTPS
+    server {
+        listen 80;
+        server_name fcatala-.42.fr;
+        return 301 https://$host$request_uri;
+    }
+
+    # HTTPS server
+    server {
+        listen 443 ssl;
+        server_name fcatala-.42.fr;
+
+        ssl_certificate     /etc/nginx/certs/nginx.crt;
+        ssl_certificate_key /etc/nginx/certs/nginx.key;
+        ssl_protocols TLSv1.2 TLSv1.3;
+
+        root /var/www/html;
+        index index.php index.html index.htm;
+
+        location / {
+            try_files $uri $uri/ /index.php?$args;
+        }
+
+        location ~ \.php$ {
+            fastcgi_pass wordpress:9000;
+            fastcgi_index index.php;
+            include fastcgi_params;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            fastcgi_param PATH_INFO $fastcgi_path_info;
+        }
+
+        location ~ /\.ht {
+            deny all;
+        }
+    }
+}
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/nginx/tools/entrypoint.sh
+-----------------------------------------------
+#!/bin/sh
+set -e
+
+CERT_DIR=/etc/nginx/certs
+CRT=$CERT_DIR/nginx.crt
+KEY=$CERT_DIR/nginx.key
+DOMAIN=fcatala-.42.fr
+
+# Create directory first
+mkdir -p "$CERT_DIR"
+
+if [ ! -f "$CRT" ] || [ ! -f "$KEY" ]; then
+    echo "Generating self-signed certificate for $DOMAIN..."
+    openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+      -keyout "$KEY" -out "$CRT" -subj "/CN=$DOMAIN"
+fi
+
+# Start nginx in foreground
+exec nginx -g 'daemon off;'
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/nginx/Dockerfile
+-----------------------------------------------
+FROM alpine:3.21
+
+RUN apk add --no-cache nginx openssl
+RUN apk update && apk add --no-cache wget curl
+RUN mkdir -p /run/nginx /etc/nginx/certs /usr/share/nginx/html
+
+# Remove the default nginx config and use your complete config
+COPY conf/my_nginx.conf /etc/nginx/nginx.conf
+
+COPY tools/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# COPY html/index.html /usr/share/nginx/html/index.html
+
+EXPOSE 80 443
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/nginx/.dockerignore
+-----------------------------------------------
+*.md
+.git
+.gitignore
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/wordpress/conf/php.ini
+-----------------------------------------------
+memory_limit = 256M
+upload_max_filesize = 64M
+post_max_size = 64M
+max_execution_time = 300
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/wordpress/conf/my_www.conf
+-----------------------------------------------
+[www]
+user = nobody
+group = nobody
+listen = 9000
+listen.owner = nobody
+listen.group = nobody
+pm = dynamic
+pm.max_children = 5
+pm.start_servers = 2
+pm.min_spare_servers = 1
+pm.max_spare_servers = 3
+clear_env = no
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/wordpress/tools/entrypoint.sh
+-----------------------------------------------
+#!/bin/sh
+set -e
+
+echo "Starting WordPress entrypoint..."
+
+# READ SECRETS FROM DOCKER SECRET FILES
+if [ -f "/run/secrets/db_password" ]; then
+    export MYSQL_PASSWORD=$(cat /run/secrets/db_password)
+    echo "✓ DB password loaded from secret"
+else
+    echo "ERROR: db_password secret not found!"
+    exit 1
+fi
+
+if [ -f "/run/secrets/wp_admin_user" ]; then
+    export WP_ADMIN_USER=$(cat /run/secrets/wp_admin_user)
+    echo "✓ Admin user loaded from secret"
+else
+    echo "ERROR: wp_admin_user secret not found!"
+    exit 1
+fi
+
+if [ -f "/run/secrets/wp_admin_password" ]; then
+    export WP_ADMIN_PASSWORD=$(cat /run/secrets/wp_admin_password)
+    echo "✓ Admin password loaded from secret"
+else
+    echo "ERROR: wp_admin_password secret not found!"
+    exit 1
+fi
+
+if [ -f "/run/secrets/wp_admin_email" ]; then
+    export WP_ADMIN_EMAIL=$(cat /run/secrets/wp_admin_email)
+    echo "✓ Admin email loaded from secret"
+else
+    echo "ERROR: wp_admin_email secret not found!"
+    exit 1
+fi
+
+if [ -f "/run/secrets/wp_user" ]; then
+    export WP_USER=$(cat /run/secrets/wp_user)
+    echo "✓ Editor user loaded from secret"
+else
+    echo "ERROR: wp_user secret not found!"
+    exit 1
+fi
+
+if [ -f "/run/secrets/wp_user_password" ]; then
+    export WP_USER_PASSWORD=$(cat /run/secrets/wp_user_password)
+    echo "✓ Editor password loaded from secret"
+else
+    echo "ERROR: wp_user_password secret not found!"
+    exit 1
+fi
+
+if [ -f "/run/secrets/wp_user_email" ]; then
+    export WP_USER_EMAIL=$(cat /run/secrets/wp_user_email)
+    echo "✓ Editor email loaded from secret"
+else
+    echo "ERROR: wp_user_email secret not found!"
+    exit 1
+fi
+
+# Wait for MariaDB service to be ready
+echo "Waiting for MariaDB service to be ready at ${MYSQL_HOST}:3306..."
+while ! nc -z ${MYSQL_HOST} 3306; do
+  sleep 2
+done
+echo "✓ MariaDB is ready"
+
+# Check if wp-config.php exists
+if [ ! -f /var/www/html/wp-config.php ]; then
+    echo "wp-config.php not found. Starting initial WordPress setup..."
+
+    # Wait for database to accept connections with credentials
+    TRIES=0
+    MAX_TRIES=30
+    DB_READY=0
+
+    echo "Attempting to create wp-config.php..."
+    while [ $TRIES -lt $MAX_TRIES ]; do
+        TRIES=$((TRIES + 1))
+        
+        # Try to create wp-config.php
+        if wp config create \
+            --allow-root \
+            --dbname="${MYSQL_DATABASE}" \
+            --dbuser="${MYSQL_USER}" \
+            --dbpass="${MYSQL_PASSWORD}" \
+            --dbhost="${MYSQL_HOST}:3306" \
+            --path="/var/www/html" 2>/dev/null; then
+            echo "✓ wp-config.php created successfully"
+            DB_READY=1
+            break
+        else
+            echo "Database connection failed (Attempt $TRIES/$MAX_TRIES). Retrying in 2 seconds..."
+            sleep 2
+        fi
+    done
+
+    if [ $DB_READY -eq 0 ]; then
+        echo "ERROR: Could not connect to database after $MAX_TRIES attempts"
+        exit 1
+    fi
+
+    # Install WordPress core
+    echo "Installing WordPress..."
+    wp core install \
+        --allow-root \
+        --url="${WP_URL}" \
+        --title="${WP_TITLE}" \
+        --admin_user="${WP_ADMIN_USER}" \
+        --admin_password="${WP_ADMIN_PASSWORD}" \
+        --admin_email="${WP_ADMIN_EMAIL}" \
+        --path="/var/www/html" \
+        --skip-email
+
+    echo "✓ WordPress core installed"
+    
+    # Create additional user
+    echo "Creating editor user: ${WP_USER}..."
+    wp user create \
+        --allow-root \
+        "${WP_USER}" \
+        "${WP_USER_EMAIL}" \
+        --user_pass="${WP_USER_PASSWORD}" \
+        --role=editor \
+        --path="/var/www/html"
+
+    echo "✓ EDITOR CREATED"
+else
+    echo "wp-config.php found. Skipping WordPress setup."
+fi
+
+# Set correct permissions
+echo "Setting file permissions..."
+chown -R www-data:www-data /var/www/html
+echo "✓ Permissions set"
+
+echo "Starting PHP-FPM..."
+exec "$@"
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/wordpress/Dockerfile
+-----------------------------------------------
+FROM alpine:3.21
+
+# Install necessary packages: PHP-FPM and required extensions for WordPress on Alpine
+# We add 'shadow' to ensure 'addgroup' and 'adduser' function correctly for custom user creation.
+RUN apk update && \
+    apk add --no-cache \
+    php83 \
+    php83-fpm \
+    php83-mysqli \
+    php83-session \
+    php83-mbstring \
+    php83-curl \
+    php83-dom \
+    php83-xml \
+    php83-simplexml \
+    php83-json \
+    php83-gd \
+    php83-zlib \
+    php83-phar \
+    curl \
+    tar \
+    shadow \
+    # Clean up apk cache
+    && rm -rf /var/cache/apk/*
+
+# Create the base web directory before extraction
+RUN mkdir -p /var/www 
+
+# Explicitly ensure the www-data group and user exist.
+# The `|| true` makes the command idempotent by ignoring the error if the user/group already exists.
+# We also redirect error output to null (`2>/dev/null`) for cleaner build logs.
+RUN addgroup -S www-data 2>/dev/null || true && \
+    adduser -D -S -G www-data www-data 2>/dev/null || true
+
+# Download, extract, and move latest WordPress core files using curl
+RUN curl -L https://wordpress.org/latest.tar.gz -o /tmp/latest.tar.gz && \
+    tar -xzf /tmp/latest.tar.gz -C /var/www/ && \
+    rm /tmp/latest.tar.gz && \
+    mv /var/www/wordpress /var/www/html
+
+# Download and install wp-cli (FIXED in Step 6)
+RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x /usr/local/bin/wp
+
+# Create the php-fpm run directory and set permissions
+RUN mkdir -p /run/php && \
+    chown -R www-data:www-data /var/www/html
+
+# Copy configuration files
+COPY conf/my_www.conf /etc/php83/php-fpm.d/www.conf
+COPY conf/php.ini /etc/php83/php.ini
+COPY tools/entrypoint.sh /usr/local/bin/entrypoint.sh
+
+# Ensure the entrypoint script is executable
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Expose the default PHP-FPM port
+EXPOSE 9000
+
+# Set the working directory
+WORKDIR /var/www/html
+
+# The entrypoint script will handle wp-config.php generation and start php-fpm
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+# Command to run PHP-FPM in the foreground
+CMD ["php-fpm83", "-F"]
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/wordpress/.dockerignore
+-----------------------------------------------
+[Binary file - content not displayed]
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/mariadb/conf/my.cnf
+-----------------------------------------------
+[mysqld]
+# Basic configuration
+user = mysql
+pid-file = /run/mysqld/mysqld.pid
+socket = /run/mysqld/mysqld.sock
+port = 3306
+datadir = /var/lib/mysql
+bind-address = 0.0.0.0
+
+# Performance and security
+skip-name-resolve
+skip-host-cache
+max_connections=100
+
+# InnoDB settings
+innodb_buffer_pool_size = 128M
+innodb_log_file_size = 16M
+innodb_flush_log_at_trx_commit = 1
+innodb_file_per_table = 1
+
+# Character set settings
+character-set-server = utf8mb4
+collation-server = utf8mb4_general_ci
+
+# This is important for the entrypoint.sh script to work correctly
+# It ensures MariaDB starts in the data directory specified
+[client]
+socket=/run/mysqld/mysqld.sock
+default-character-set = utf8mb4
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/mariadb/tools/entrypoint.sh
+-----------------------------------------------
+#!/bin/sh
+
+# Set the execution context for debugging
+echo "Starting MariaDB entrypoint as user: $(whoami)"
+
+# 1. READ SECRETS AND SET ENVIRONMENT VARIABLES
+export MYSQL_ROOT_PASSWORD=$(cat /run/secrets/db_root_password)
+export MYSQL_PASSWORD=$(cat /run/secrets/db_password)
+
+# Check if the database has already been initialized (use a robust check)
+if [ ! -d /var/lib/mysql/mysql ]; then
+    echo "MariaDB data directory not initialized. Initializing database..."
+
+    # 2. INITIALIZE DATABASE
+    mariadb-install-db --user=mysql --datadir="/var/lib/mysql"
+
+    # Start the MariaDB server in the background temporarily for setup.
+    # We use --skip-bind-address to ensure clean localhost socket connection.
+    /usr/bin/mariadbd --user=mysql --datadir="/var/lib/mysql" --skip-networking --skip-bind-address &
+    MYSQL_PID=$!
+    
+    # CRITICAL FIX: Implement a robust readiness check (replaces 'sleep 10')
+    TRIES=0
+    MAX_TRIES=30
+    echo "Waiting for temporary MariaDB server to be ready..."
+    while ! mariadb-admin ping -h localhost --socket=/run/mysqld/mysqld.sock 2>/dev/null; do
+        TRIES=$((TRIES + 1))
+        if [ $TRIES -ge $MAX_TRIES ]; then
+            echo "Error: Temporary MariaDB server failed to start after $MAX_TRIES attempts."
+            kill $MYSQL_PID
+            exit 1
+        fi
+        sleep 1
+    done
+    echo "Temporary MariaDB server is ready for configuration."
+
+    # 3. CONFIGURE DATABASE (using direct heredoc and the 'mariadb' client)
+    # The -h localhost ensures we use the proper socket connection.
+    /usr/bin/mariadb -u root -h localhost --socket=/run/mysqld/mysqld.sock <<EOF
+-- Set the root password
+ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' WITH GRANT OPTION;
+
+-- Create the application database
+CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
+
+-- Create the application user and grant privileges
+CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
+GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
+
+-- Remove anonymous users and remote root access for security
+DELETE FROM mysql.user WHERE User='';
+-- DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
+
+-- Apply the changes
+FLUSH PRIVILEGES;
+EOF
+
+    # Stop the temporary MariaDB server
+    kill $MYSQL_PID
+    wait $MYSQL_PID
+    echo "MariaDB configuration complete. Temporary server stopped."
+else
+    echo "MariaDB data directory already initialized. Skipping initialization..."
+fi
+
+# 4. START THE FINAL SERVER PROCESS
+echo "Starting MariaDB server in production mode..."
+exec /usr/bin/mariadbd \
+     --user=mysql \
+     --datadir="/var/lib/mysql" \
+     --bind-address=0.0.0.0 \
+     --port=3306
+
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/mariadb/Dockerfile
+-----------------------------------------------
+FROM alpine:3.21
+
+# Install MariaDB server and client.
+# The `mariadb` package on Alpine includes both the server and client tools.
+RUN apk update && \
+    apk add --no-cache mariadb mariadb-client mariadb-server-utils \
+    && rm -rf /var/cache/apk/*
+
+# Create necessary directories for MariaDB run files and data, and set correct ownership.
+# MariaDB runs as the 'mysql' user, so these directories must be owned by 'mysql'.
+RUN mkdir -p /run/mysqld /var/lib/mysql && \
+    chown -R mysql:mysql /var/lib/mysql /run/mysqld
+
+# Copy configuration and entrypoint script. 
+# Paths are relative to the build context (srcs/requirements/mariadb/).
+COPY conf/my.cnf /etc/my.cnf
+COPY tools/entrypoint.sh /usr/local/bin/entrypoint.sh
+
+# Ensure the entrypoint script is executable
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Expose the default MariaDB port
+EXPOSE 3306
+
+# REMOVED: USER mysql - User switching is now handled by entrypoint.sh
+
+# The entrypoint script will handle database initialization and start the server
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/srcs/requirements/mariadb/.dockerignore
+-----------------------------------------------
+*.md
+.git
+.gitignore
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/wp_admin_email
+-----------------------------------------------
+ow@ow.es
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/db_password
+-----------------------------------------------
+database
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/credentials
+-----------------------------------------------
+# Inception Project Credentials Reference
+
+Database:
+  User: wp_user
+  Password: [see db_password]
+  Root Password: [see db_root_password]
+
+WordPress Admin:
+  Username: [see wp_admin_user]
+  Password: [see wp_admin_password]
+  Email: [see wp_admin_email]
+
+WordPress Editor:
+  Username: [see wp_user]
+  Password: [see wp_user_password]
+  Email: [see wp_user_email]
+
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/wp_user_password
+-----------------------------------------------
+ediotr
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/db_root_password
+-----------------------------------------------
+root1
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/wp_admin_user
+-----------------------------------------------
+owner
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/wp_user
+-----------------------------------------------
+editor
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/wp_admin_password
+-----------------------------------------------
+owner
+
+-----------------------------------------------
+File: /home/fcatala-/inception/secrets/wp_user_email
+-----------------------------------------------
+ed@ed.ed
+
+-----------------------------------------------
+File: Makefile
+-----------------------------------------------
+# Makefile for Inception project
+
+# Variables
+COMPOSE_FILE = srcs/docker-compose.yml
+DATA_PATH = /home/$(USER)/data
+SECRETS_DIR = secrets
+
+# Colors for output
+GREEN = \033[0;32m
+RED = \033[0;31m
+YELLOW = \033[0;33m
+NC = \033[0m # No Color
+
+bonus: all
+
+all: build up
+
+# Create necessary directories for volumes
+setup: setup-secrets
+	@echo -e "$(YELLOW)Creating data directories...$(NC)"
+	@mkdir -p $(DATA_PATH)/mariadb
+	@mkdir -p $(DATA_PATH)/wordpress
+#	@mkdir -p $(DATA_PATH)/adminer
+	@chmod -R u+w $(DATA_PATH) 2>/dev/null || true
+	@chmod -R u+w secrets 2>/dev/null || true
+	@echo -e "$(GREEN)Setup complete!$(NC)"
+
+# Setup secrets with user input
+setup-secrets:
+	@MISSING=0; \
+	if [ ! -d $(SECRETS_DIR) ]; then \
+		MISSING=1; \
+	else \
+		for file in db_password db_root_password wp_admin_user wp_admin_password wp_admin_email wp_user wp_user_password wp_user_email; do \
+			if [ ! -f $(SECRETS_DIR)/$$file ] || [ ! -s $(SECRETS_DIR)/$$file ]; then \
+				MISSING=3; \
+				break; \
+			fi; \
+		done; \
+	fi; \
+	if [ $$MISSING -eq 0 ]; then \
+		echo -e "$(GREEN)All secrets already configured in ./$(SECRETS_DIR)/$(NC) Skipping creation"; \
+	else \
+		echo -e "$(YELLOW)=== Inception Secrets Setup ===$(NC)"; \
+		if [ $$MISSING -gt 1 ]; then \
+			echo -e "$(RED)All secrets will be overwritten$(NC)";\
+			sleep 2; \
+		fi; \
+		mkdir -p $(SECRETS_DIR); \
+		chmod 700 $(SECRETS_DIR); \
+		echo ""; \
+		./scripts/setup_secrets.sh; \
+		chmod 600 $(SECRETS_DIR)/*; \
+		echo ""; \
+		echo -e "$(GREEN)✅ Secrets created successfully!$(NC)"; \
+		echo -e "$(YELLOW)⚠️  Keep ./$(SECRETS_DIR)/ safe$(NC)"; \
+	fi
+
+# Build all containers
+build: setup
+	@echo -e "$(YELLOW)Building containers...$(NC)"
+	@docker-compose -f $(COMPOSE_FILE) build
+	@echo -e "$(GREEN)Build complete!$(NC)"
+
+# Start all containers
+up:
+	@echo -e "$(YELLOW)Starting containers...$(NC)"
+	@docker-compose -f $(COMPOSE_FILE) up -d
+
+# Stop all containers
+down:
+	@echo -e "$(YELLOW)Stopping containers...$(NC)"
+	@docker-compose -f $(COMPOSE_FILE) down
+	@echo -e "$(GREEN)Containers stopped!$(NC)"
+
+# Clean containers and images
+clean: down
+	@echo -e "$(YELLOW)Cleaning containers and images...$(NC)"
+	@docker-compose -f $(COMPOSE_FILE) down -v --rmi all
+	@echo -e "$(GREEN)Clean complete!$(NC)"
+
+# Full clean including volumes data
+fclean: clean
+	@echo -e "$(RED)Removing all data...$(NC)"
+	@mkdir -p $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress $(DATA_PATH)/adminer
+	@chmod -R u+w $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress $(DATA_PATH)/adminer 2>/dev/null || true
+	@rm -rf $(DATA_PATH)/mariadb/* 2>/dev/null || true
+	@rm -rf $(DATA_PATH)/wordpress/* 2>/dev/null || true
+	@rm -rf $(DATA_PATH)/adminer/* 2>/dev/null || true
+	@rm -rf $(SECRETS_DIR)
+	@chown -R $(USER):$(USER) $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress $(DATA_PATH)/adminer 2>/dev/null || true
+	@docker system prune -af --volumes > /dev/null 2>&1 || true
+	@echo -e "$(GREEN)Full clean complete!$(NC)"
+	@if [ -z "$$(docker ps -q)" ]; then \
+		echo -e "$(GREEN)No containers running.$(NC)"; \
+	else \
+		echo -e "$(YELLOW)Some containers are still running.$(NC)"; \
+		docker ps; \
+	fi
+	@if [ -z "$$(docker volume ls -q)" ]; then echo -e "$(GREEN)No volumes available!$(NC)"; \
+	else echo -e "$(YELLOW)Some volumes remain$(NC)"; docker volume ls;\
+	fi
+	@if [ -z "$$(docker image ls -q)" ]; then echo -e "$(GREEN)All images removed!$(NC)"; \
+	else echo -e "$(YELLOW)Some images remain$(NC)"; docker image ls;\
+	fi
+	@if [ `docker network ls | wc -l` -eq 4 ]; then echo -e "$(GREEN)All project networks removed!$(NC)"; \
+	else echo -e "$(YELLOW)Network remain! :-($(NC)"; \
+	fi
+
+# Rebuild everything
+re: fclean all
+
+# Show logs
+logs:
+	@docker-compose -f $(COMPOSE_FILE) logs -f
+
+# Show container status
+ps:
+	@docker-compose -f $(COMPOSE_FILE) ps
+
+# Show help
+help:
+	@echo -e "$(GREEN)Inception Makefile Commands:$(NC)"
+	@echo "  make build  - Build all Docker images"
+	@echo "  make clean  - Stop and remove containers/images"
+	@echo "  make down   - Stop all containers"
+	@echo "  make fclean - Full clean including data"
+	@echo "  make logs   - Show container logs"
+	@echo "  make ps     - Show container status"
+	@echo "  make re     - Rebuild everything from scratch"
+	@echo "  make setup  - Create necessary directories"
+	@echo "  make up     - Start all containers"
+
+
+.PHONY: all bonus build up down clean fclean re logs ps setup-secrets setup
+
+-----------------------------------------------
+Scripts
+-----------------------------------------------
+
+-----------------------------------------------
+File: /home/fcatala-/inception/scripts/gen_context.sh
+-----------------------------------------------
+#!/bin/sh
+
+# Script to create content.txt with directory structure, file listings, and contents
+# Compatible with Alpine Linux (ash/busybox)
+# Usage: ./generate_content.sh
+
+NOW=`date '+%Y_%m_%d_%H_%M'`
+OUTPUT_FILE="$NOW.content.txt"
+
+# Clear the output file if it exists
+> "$OUTPUT_FILE"
+
+echo "Generating content.txt..."
+
+# 0. Get the date
+echo "===============================================" >> "$OUTPUT_FILE"
+echo -n "UPDATED AT " >> "$OUTPUT_FILE"; echo $NOW >> "$OUTPUT_FILE"
+echo "===============================================" >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+
+# 1. Add directory tree
+
+echo "===============================================" >> "$OUTPUT_FILE"
+echo "DIRECTORY TREE STRUCTURE" >> "$OUTPUT_FILE"
+echo "===============================================" >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+
+if command -v tree >/dev/null 2>&1; then
+    tree -a -I '.git' ~/inception >> "$OUTPUT_FILE"
+else
+    # Fallback if tree command is not available
+    find . -type d | sed 's|[^/]*/|  |g' >> "$OUTPUT_FILE"
+fi
+
+echo "" >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+
+# 2. Add ls -laR output
+echo "===============================================" >> "$OUTPUT_FILE"
+echo "RECURSIVE FILE LISTING (ls -laR)" >> "$OUTPUT_FILE"
+echo "===============================================" >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+ls -laR ~/inception/scripts >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+ls -laR ~/inception/secrets >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+ls -laR ~/inception/srcs >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+
+# 3. Add file contents
+echo "===============================================" >> "$OUTPUT_FILE"
+echo "FILE CONTENTS" >> "$OUTPUT_FILE"
+echo "===============================================" >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+
+# RECURSIVE FILE READING: The 'find' command searches recursively from the current 
+# directory (.) through ALL subdirectories for regular files (-type f).
+# Each file found is then read with 'cat' to display its content.
+# This ensures files in nested subdirectories are included.
+find ~/inception/srcs -type f ! -name "$OUTPUT_FILE" | while read -r file; do
+    echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+    echo "File: $file" >> "$OUTPUT_FILE"
+    echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+    
+    # Check if file is readable
+    if [ -r "$file" ]; then
+        # Try to detect binary files - Alpine compatible method
+        if command -v file >/dev/null 2>&1; then
+            # If 'file' command exists, use it
+            if file "$file" | grep -q "text"; then
+                cat "$file" >> "$OUTPUT_FILE"
+            else
+                echo "[Binary file - content not displayed]" >> "$OUTPUT_FILE"
+            fi
+        else
+            # Fallback: try to read the file, but be aware it might be binary
+            # Check for null bytes as indicator of binary content
+            if grep -q '\x00' "$file" 2>/dev/null; then
+                echo "[Binary file detected - content not displayed]" >> "$OUTPUT_FILE"
+            else
+                cat "$file" >> "$OUTPUT_FILE"
+            fi
+        fi
+    else
+        echo "[File not readable - permission denied]" >> "$OUTPUT_FILE"
+    fi
+    
+    echo "" >> "$OUTPUT_FILE"
+    echo "" >> "$OUTPUT_FILE"
+done
+
+find ~/inception/secrets -type f ! -name "$OUTPUT_FILE" | while read -r file; do
+    echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+    echo "File: $file" >> "$OUTPUT_FILE"
+    echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+    
+    # Check if file is readable
+    if [ -r "$file" ]; then
+        # Try to detect binary files - Alpine compatible method
+        if command -v file >/dev/null 2>&1; then
+            # If 'file' command exists, use it
+            if file "$file" | grep -q "text"; then
+                cat "$file" >> "$OUTPUT_FILE"
+            else
+                echo "[Binary file - content not displayed]" >> "$OUTPUT_FILE"
+            fi
+        else
+            # Fallback: try to read the file, but be aware it might be binary
+            # Check for null bytes as indicator of binary content
+            if grep -q '\x00' "$file" 2>/dev/null; then
+                echo "[Binary file detected - content not displayed]" >> "$OUTPUT_FILE"
+            else
+                cat "$file" >> "$OUTPUT_FILE"
+            fi
+        fi
+    else
+        echo "[File not readable - permission denied]" >> "$OUTPUT_FILE"
+    fi
+    
+    echo "" >> "$OUTPUT_FILE"
+    echo "" >> "$OUTPUT_FILE"
+done
+
+echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+echo "File: Makefile" >> "$OUTPUT_FILE"
+echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+
+cat ~/inception/Makefile >> "$OUTPUT_FILE"
+
+echo "" >> "$OUTPUT_FILE"
+
+echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+echo "Scripts" >> "$OUTPUT_FILE"
+echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+echo "" >> "$OUTPUT_FILE"
+find ~/inception/scripts -type f ! -name "$OUTPUT_FILE" | while read -r file; do
+    echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+    echo "File: $file" >> "$OUTPUT_FILE"
+    echo "-----------------------------------------------" >> "$OUTPUT_FILE"
+    
+    # Check if file is readable
+    if [ -r "$file" ]; then
+        # Try to detect binary files - Alpine compatible method
+        if command -v file >/dev/null 2>&1; then
+            # If 'file' command exists, use it
+            if file "$file" | grep -q "text"; then
+                cat "$file" >> "$OUTPUT_FILE"
+            else
+                echo "[Binary file - content not displayed]" >> "$OUTPUT_FILE"
+            fi
+        else
+            # Fallback: try to read the file, but be aware it might be binary
+            # Check for null bytes as indicator of binary content
+            if grep -q '\x00' "$file" 2>/dev/null; then
+                echo "[Binary file detected - content not displayed]" >> "$OUTPUT_FILE"
+            else
+                cat "$file" >> "$OUTPUT_FILE"
+            fi
+        fi
+    else
+        echo "[File not readable - permission denied]" >> "$OUTPUT_FILE"
+    fi
+    
+    echo "" >> "$OUTPUT_FILE"
+done
+
+echo "Content generation complete! Output saved to $OUTPUT_FILE"
+
+-----------------------------------------------
+File: /home/fcatala-/inception/scripts/setup_secrets.sh
+-----------------------------------------------
+#!/bin/sh
+# scripts/setup_secrets.sh - Interactive secrets configuration
+
+set -e
+# Colors for output
+GREEN="\e[0;32m"
+RED="\e[0;31m"
+YELLOW="\e[0;33m"
+NC="\e[0m"
+SECRETS_DIR="secrets"
+
+validate_strict_wordpress_email() {
+    local email="$1"
+    local EMAIL_REGEX="^[A-Za-z0-9.!#$%&'*+/=?^\`{|}~-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$"
+    # More practical strict validation
+        if [[ ${#email} -lt 6 ]]; then
+        echo -e "${RED}✗ email too short${NC}"
+        return 1
+    fi
+    
+    if [[ ! "$email" =~ $EMAIL_REGEX ]]; then
+        echo -e "${RED}✗ Invalid email format${NC}"
+        return 1
+    fi
+
+    # WordPress-specific validations
+    if [[ "$email" =~ \\.\\. ]]; then
+        echo -e "${RED}✗ Email cannot contain consecutive dots${NC}"
+        return 1
+    fi
+    
+    if [[ "$email" =~ ^[.-] || "$email" =~ @[.-] || "$email" =~ [.-]$ ]]; then
+        echo -e "${RED}✗ Email cannot start or end with . or -${NC}"
+        return 1
+    fi
+    
+    local local_part="${email%@*}"
+    local domain_part="${email#*@}"
+    
+    if [[ ${#local_part} -gt 64 ]]; then
+        echo -e "${RED}✗ Local part (before @) too long (max 64 characters)${NC}"
+        return 1
+    fi
+    
+    if [[ ${#domain_part} -gt 255 ]]; then
+        echo -e "${RED}✗ Domain part too long${NC}"
+        return 1
+    fi
+
+    if [[ "$domain_part" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+        echo -e "${RED}✗ IP addresses not allowed in email domain${NC}"
+        return 1
+    fi
+    
+    delimiter="."
+    IFS="$delimiter"
+    for sub in $domain_part; do
+        if [[ "$sub" =~ [-]$ || "$sub" =~ ^[-] ]]; then
+            echo -e "${RED}✗ Hyphen not allowed at ${sub} ${NC}"
+        return 1
+        fi
+    done
+
+    return 0
+}
+clear
+echo "Now you are going to create the secret files for the Inception project."
+echo "Passwords will not be displayed while typing."
+echo ""
+
+# Database credentials
+echo "=== Database Configuration ==="
+
+CONTROL=0
+while [ $CONTROL == 0 ]; do
+	echo "⚠️  Passwords must be minimum 5 characters."
+	echo -en "${YELLOW}Database$ password:${NC} "
+	read -s DB_PASS
+	if [ `echo $DB_PASS | wc -m` -ge 6 ]; then
+		CONTROL=1
+	fi
+done
+echo ""
+CONTROL=0
+while [ $CONTROL == 0 ]; do
+	
+	echo -en "Database ${RED}ROOT${NC} password: "
+	read -s DB_ROOT_PASS
+	if [ ${#DB_ROOT_PASS} -ge 5 ]; then
+		CONTROL=1
+	else
+		echo "⚠️  Passwords must be minimum 5 characters."
+	fi
+done
+
+echo ""
+
+# WordPress admin
+CONTROL=0
+echo ""
+echo "=== WordPress Admin User ==="
+echo "⚠️  Username must a single word and do NOT contain 'admin', 'Admin', or 'administrator'"
+while [ $CONTROL == 0 ]; do
+	read -p "Admin username: " WP_ADMIN_USER
+	if echo "$WP_ADMIN_USER" | grep -qi "admin"; then
+		echo "Error: Username cannot contain 'admin'!"
+	else
+		if [ `echo $WP_ADMIN_USER | wc -w` -eq 0 ]; then
+			echo "Error: Username cannot be empty!"
+		elif [ `echo $WP_ADMIN_USER | wc -w` -gt 1 ]; then
+			echo "Error: Username must be a single word"
+		else
+			CONTROL=1
+		fi
+	fi
+done
+
+CONTROL=0
+while [ $CONTROL == 0 ]; do
+	
+	echo -en "WP ${GREEN}Admin${NC} password: "
+	read -s WP_ADMIN_PASS
+	if [ ${#WP_ADMIN_PASS} -ge 5 ]; then
+		CONTROL=1
+	else
+		echo "⚠️  Passwords must be minimum 5 characters."
+	fi
+done
+
+echo ""
+
+CONTROL=0
+while [ $CONTROL -eq 0 ]; do
+    read -p "Admin email: " WP_ADMIN_EMAIL
+    
+    if [[ -z "$WP_ADMIN_EMAIL" ]]; then
+        echo -e "${RED}✗ Email cannot be empty.${NC}"
+        continue
+    fi
+    
+    if validate_strict_wordpress_email "$WP_ADMIN_EMAIL"; then
+        echo -e "${GREEN}✓ Valid email format${NC}"
+        CONTROL=1
+    else
+        echo -e "${RED}✗ Please try again (example: admin@example.com).${NC}"
+    fi
+done
+
+# WordPress editor
+echo ""
+CONTROL=0
+echo "=== WordPress Editor User ==="
+echo "⚠️  Username must a single word"
+while [ $CONTROL == 0 ]; do
+	read -p "Username (editor): " WP_USER
+	if [ `echo $WP_ADMIN_USER | wc -w` -eq 0 ]; then
+		echo "Error: Username cannot be empty!"
+	elif [ `echo $WP_ADMIN_USER | wc -w` -gt 1 ]; then
+		echo "Error: Username must be a single word"
+	else
+		CONTROL=1
+	fi
+done
+
+CONTROL=0
+while [ $CONTROL == 0 ]; do
+	
+	echo -en "WP ${GREEN}User (editor)${NC} password: "
+	read -s WP_USER_PASS
+	if [ ${#WP_USER_PASS} -ge 5 ]; then
+		CONTROL=1
+	else
+		echo "⚠️  Passwords must be minimum 5 characters."
+	fi
+done
+echo ""
+
+CONTROL=0
+while [ $CONTROL -eq 0 ]; do
+    read -p "User (editor) email: " WP_USER_EMAIL
+    
+    if [[ -z "$WP_USER_EMAIL" ]]; then
+        echo -e "${RED}✗ Email cannot be empty.${NC}"
+        continue
+    fi
+    
+    if validate_strict_wordpress_email "$WP_USER_EMAIL"; then
+        echo -e "${GREEN}✓ Valid email format${NC}"
+        CONTROL=1
+    else
+        echo -e "${RED}✗ Invalid email format. Please try again (example: user@example.com).${NC}"
+    fi
+done
+
+# Write secrets
+echo ""
+echo "Writing secrets to ./$SECRETS_DIR/..."
+
+echo -n "$DB_PASS" > "$SECRETS_DIR/db_password"
+echo -n "$DB_ROOT_PASS" > "$SECRETS_DIR/db_root_password"
+echo -n "$WP_ADMIN_USER" > "$SECRETS_DIR/wp_admin_user"
+echo -n "$WP_ADMIN_PASS" > "$SECRETS_DIR/wp_admin_password"
+echo -n "$WP_ADMIN_EMAIL" > "$SECRETS_DIR/wp_admin_email"
+echo -n "$WP_USER" > "$SECRETS_DIR/wp_user"
+echo -n "$WP_USER_PASS" > "$SECRETS_DIR/wp_user_password"
+echo -n "$WP_USER_EMAIL" > "$SECRETS_DIR/wp_user_email"
+
+# Create credentials reference
+cat > "$SECRETS_DIR/credentials" << EOF
+# Inception Project Credentials Reference
+
+Database:
+  User: wp_user
+  Password: [see db_password]
+  Root Password: [see db_root_password]
+
+WordPress Admin:
+  Username: [see wp_admin_user]
+  Password: [see wp_admin_password]
+  Email: [see wp_admin_email]
+
+WordPress Editor:
+  Username: [see wp_user]
+  Password: [see wp_user_password]
+  Email: [see wp_user_email]
+EOF
+
+echo "Done!"

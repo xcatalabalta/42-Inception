@@ -39,6 +39,7 @@ if [ ! -d /var/lib/mysql/mysql ]; then
     /usr/bin/mariadb -u root -h localhost --socket=/run/mysqld/mysqld.sock <<EOF
 -- Set the root password
 ALTER USER 'root'@'localhost' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' WITH GRANT OPTION;
 
 -- Create the application database
 CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
@@ -49,7 +50,7 @@ GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
 
 -- Remove anonymous users and remote root access for security
 DELETE FROM mysql.user WHERE User='';
-DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
+-- DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
 
 -- Apply the changes
 FLUSH PRIVILEGES;
@@ -65,5 +66,9 @@ fi
 
 # 4. START THE FINAL SERVER PROCESS
 echo "Starting MariaDB server in production mode..."
-exec /usr/bin/mariadbd --user=mysql --datadir="/var/lib/mysql" --bind-address=0.0.0.0 --port=3306
+exec /usr/bin/mariadbd \
+     --user=mysql \
+     --datadir="/var/lib/mysql" \
+     --bind-address=0.0.0.0 \
+     --port=3306
 

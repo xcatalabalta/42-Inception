@@ -63,7 +63,7 @@ validate_strict_wordpress_email() {
 
     return 0
 }
-# clear
+clear
 echo "Now you are going to create the secret files for the Inception project."
 echo "Passwords will not be displayed while typing."
 echo ""

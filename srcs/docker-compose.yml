@@ -3,7 +3,7 @@
 services:
   mariadb:
     build: ./requirements/mariadb
-    container_name: mariadb
+    container_name: mariadb_XC
     restart: always
     env_file: .env
     secrets:
@@ -22,7 +22,7 @@ services:
 
   wordpress:
     build: ./requirements/wordpress
-    container_name: wordpress
+    container_name: wordpress_XC
     restart: always
     env_file: .env
     secrets:
@@ -49,7 +49,7 @@ services:
 
   nginx:
     build: ./requirements/nginx
-    container_name: nginx
+    container_name: nginx_XC
     restart: always
     volumes:
       - wordpress_data:/var/www/html
@@ -71,7 +71,7 @@ services:
     build:
       context: ./requirements/adminer
       dockerfile: Dockerfile
-    container_name: adminer
+    container_name: adminer_XC
     restart: unless-stopped
     ports:
       - "8080:8080"               # Expose to host for evaluator browser access

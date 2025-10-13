@@ -126,7 +126,7 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --role=editor \
         --path="/var/www/html"
 
-    echo "✓ Editor user created"
+    echo "✓ EDITOR CREATED"
 else
     echo "wp-config.php found. Skipping WordPress setup."
 fi
