@@ -116,19 +116,62 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 
     echo "✓ WordPress core installed"
     
-    # Create additional user
-    echo "Creating editor user: ${WP_USER}..."
-    wp user create \
-        --allow-root \
-        "${WP_USER}" \
-        "${WP_USER_EMAIL}" \
-        --user_pass="${WP_USER_PASSWORD}" \
-        --role=editor \
-        --path="/var/www/html"
-
-    echo "✓ EDITOR CREATED"
+    # Wait a moment for WordPress to fully initialize
+    sleep 2
+    
+    # Check if editor user already exists before creating
+    echo "Checking if editor user '${WP_USER}' already exists..."
+    if wp user get "${WP_USER}" --allow-root --path="/var/www/html" >/dev/null 2>&1; then
+        echo "⚠ Editor user '${WP_USER}' already exists. Updating password..."
+        wp user update "${WP_USER}" \
+            --allow-root \
+            --user_pass="${WP_USER_PASSWORD}" \
+            --path="/var/www/html"
+        echo "✓ Editor user password updated"
+    else
+        # Create additional user
+        echo "Creating editor user: ${WP_USER}..."
+        if wp user create \
+            --allow-root \
+            "${WP_USER}" \
+            "${WP_USER_EMAIL}" \
+            --user_pass="${WP_USER_PASSWORD}" \
+            --role=editor \
+            --path="/var/www/html" 2>&1; then
+            echo "✓ EDITOR CREATED SUCCESSFULLY"
+        else
+            echo "ERROR: Failed to create editor user"
+            exit 1
+        fi
+    fi
+    
+    # Verify the user was created
+    echo "Verifying editor user..."
+    if wp user get "${WP_USER}" --allow-root --path="/var/www/html" >/dev/null 2>&1; then
+        echo "✓ Editor user verified: ${WP_USER}"
+        # Show user details for debugging
+        wp user list --allow-root --path="/var/www/html" --fields=ID,user_login,user_email,roles
+    else
+        echo "ERROR: Editor user verification failed!"
+        exit 1
+    fi
 else
-    echo "wp-config.php found. Skipping WordPress setup."
+    echo "wp-config.php found. Verifying WordPress setup..."
+    
+    # Verify editor user exists even if WordPress is already installed
+    if ! wp user get "${WP_USER}" --allow-root --path="/var/www/html" >/dev/null 2>&1; then
+        echo "⚠ Editor user missing. Creating now..."
+        wp user create \
+            --allow-root \
+            "${WP_USER}" \
+            "${WP_USER_EMAIL}" \
+            --user_pass="${WP_USER_PASSWORD}" \
+            --role=editor \
+            --path="/var/www/html"
+        echo "✓ Editor user created"
+    else
+        echo "✓ Editor user exists"
+    fi
 fi
 
 # Set correct permissions

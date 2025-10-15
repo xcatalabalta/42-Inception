@@ -89,7 +89,7 @@ while [ $CONTROL == 0 ]; do
 	if [ ${#DB_ROOT_PASS} -ge 5 ]; then
 		CONTROL=1
 	else
-		echo "⚠️  Passwords must be minimum 5 characters."
+		echo -e "${RED}Error:${NC} Passwords must be minimum 5 characters."
 	fi
 done
 
@@ -103,12 +103,12 @@ echo "⚠️  Username must a single word and do NOT contain 'admin', 'Admin', o
 while [ $CONTROL == 0 ]; do
 	read -p "Admin username: " WP_ADMIN_USER
 	if echo "$WP_ADMIN_USER" | grep -qi "admin"; then
-		echo "Error: Username cannot contain 'admin'!"
+		echo -e "${RED}Error:${NC} Username cannot contain 'admin'!"
 	else
 		if [ `echo $WP_ADMIN_USER | wc -w` -eq 0 ]; then
-			echo "Error: Username cannot be empty!"
+			echo -e "${RED}Error:${NC} Username cannot be empty!"
 		elif [ `echo $WP_ADMIN_USER | wc -w` -gt 1 ]; then
-			echo "Error: Username must be a single word"
+			echo -e "${RED}Error:${NC} Username must be a single word"
 		else
 			CONTROL=1
 		fi
@@ -123,7 +123,7 @@ while [ $CONTROL == 0 ]; do
 	if [ ${#WP_ADMIN_PASS} -ge 5 ]; then
 		CONTROL=1
 	else
-		echo "⚠️  Passwords must be minimum 5 characters."
+		echo -e "${RED}Error:${NC} Passwords must be minimum 5 characters."
 	fi
 done
 
@@ -134,15 +134,14 @@ while [ $CONTROL -eq 0 ]; do
     read -p "Admin email: " WP_ADMIN_EMAIL
     
     if [[ -z "$WP_ADMIN_EMAIL" ]]; then
-        echo -e "${RED}✗ Email cannot be empty.${NC}"
+        echo -e "${RED}Error:${NC} Email cannot be empty."
         continue
     fi
-    
     if validate_strict_wordpress_email "$WP_ADMIN_EMAIL"; then
         echo -e "${GREEN}✓ Valid email format${NC}"
         CONTROL=1
     else
-        echo -e "${RED}✗ Please try again (example: admin@example.com).${NC}"
+        echo -e "${RED}Error:${NC} Please try again (example: admin@example.com)."
     fi
 done
 
@@ -153,11 +152,13 @@ echo "=== WordPress Editor User ==="
 echo "⚠️  Username must a single word"
 while [ $CONTROL == 0 ]; do
 	read -p "Username (editor): " WP_USER
-	if [ `echo $WP_ADMIN_USER | wc -w` -eq 0 ]; then
-		echo "Error: Username cannot be empty!"
-	elif [ `echo $WP_ADMIN_USER | wc -w` -gt 1 ]; then
-		echo "Error: Username must be a single word"
-	else
+	if [ `echo $WP_USER | wc -w` -eq 0 ]; then
+		echo -e "${RED}Error:${NC} Username cannot be empty!"
+	elif [ `echo $WP_USER | wc -w` -gt 1 ]; then
+		echo -e "${RED}Error:${NC} Username must be a single word"
+    elif [ $WP_USER == $WP_ADMIN_USER ]; then
+        echo -e "${RED}Error:${NC} Sorry, that username is already used!"
+    else
 		CONTROL=1
 	fi
 done
@@ -170,7 +171,7 @@ while [ $CONTROL == 0 ]; do
 	if [ ${#WP_USER_PASS} -ge 5 ]; then
 		CONTROL=1
 	else
-		echo "⚠️  Passwords must be minimum 5 characters."
+		echo -e "${RED}Error:${NC} Passwords must be minimum 5 characters."
 	fi
 done
 echo ""
@@ -180,15 +181,18 @@ while [ $CONTROL -eq 0 ]; do
     read -p "User (editor) email: " WP_USER_EMAIL
     
     if [[ -z "$WP_USER_EMAIL" ]]; then
-        echo -e "${RED}✗ Email cannot be empty.${NC}"
+        echo -e "${RED}Error:${NC} Email cannot be empty."
         continue
     fi
-    
+    if [[ "$WP_USER_EMAIL" = "$WP_ADMIN_EMAIL" ]]; then
+        echo -e "${RED}Error:${NC} Sorry, that email address is already used!"
+        continue
+    fi
     if validate_strict_wordpress_email "$WP_USER_EMAIL"; then
         echo -e "${GREEN}✓ Valid email format${NC}"
         CONTROL=1
     else
-        echo -e "${RED}✗ Invalid email format. Please try again (example: user@example.com).${NC}"
+        echo -e "${RED}Error:${NC} Invalid email format. Please try again (example: user@example.com)."
     fi
 done
 
