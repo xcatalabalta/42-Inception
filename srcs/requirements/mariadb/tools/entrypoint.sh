@@ -50,6 +50,7 @@ GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
 
 -- Remove anonymous users and remote root access for security
 DELETE FROM mysql.user WHERE User='';
+-- DO NOT DELETE root user (the former idea was good but it didn't work)
 -- DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
 
 -- Apply the changes

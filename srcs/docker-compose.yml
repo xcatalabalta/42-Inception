@@ -76,7 +76,7 @@ services:
     ports:
       - "8080:8080"               # Expose to host for evaluator browser access
     networks:
-      - inception                 # use the same network you already use (e.g. inception)
+      - inception
     depends_on:
       - mariadb
 

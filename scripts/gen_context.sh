@@ -28,8 +28,8 @@ echo "" >> "$OUTPUT_FILE"
 if command -v tree >/dev/null 2>&1; then
     tree -a -I '.git' ~/inception >> "$OUTPUT_FILE"
 else
-    # Fallback if tree command is not available
-    find . -type d | sed 's|[^/]*/|  |g' >> "$OUTPUT_FILE"
+    # Mimmic tree command if it is not available (not necessary but)
+    find . -type d | sed 's#[^/]*/#|__#g' >> "$OUTPUT_FILE"
 fi
 
 echo "" >> "$OUTPUT_FILE"
