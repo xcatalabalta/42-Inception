@@ -74,7 +74,7 @@ services:
     container_name: adminer_XC
     restart: unless-stopped
     ports:
-      - "8080:8080"               # Expose to host for evaluator browser access
+      - "8080:8080"
     networks:
       - inception
     depends_on:

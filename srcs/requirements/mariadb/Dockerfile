@@ -1,7 +1,6 @@
 FROM alpine:3.21
 
-# Install MariaDB server and client.
-# The `mariadb` package on Alpine includes both the server and client tools.
+# Install MariaDB server and client and server tools.
 RUN apk update && \
     apk add --no-cache mariadb mariadb-client mariadb-server-utils \
     && rm -rf /var/cache/apk/*
@@ -12,7 +11,7 @@ RUN mkdir -p /run/mysqld /var/lib/mysql && \
     chown -R mysql:mysql /var/lib/mysql /run/mysqld
 
 # Copy configuration and entrypoint script. 
-# Paths are relative to the build context (srcs/requirements/mariadb/).
+# Paths are relative to the build context
 COPY conf/my.cnf /etc/my.cnf
 COPY tools/entrypoint.sh /usr/local/bin/entrypoint.sh
 
@@ -21,8 +20,6 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Expose the default MariaDB port
 EXPOSE 3306
-
-# REMOVED: USER mysql - User switching is now handled by entrypoint.sh
 
 # The entrypoint script will handle database initialization and start the server
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

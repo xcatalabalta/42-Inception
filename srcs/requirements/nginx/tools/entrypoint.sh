@@ -6,7 +6,7 @@ CRT=$CERT_DIR/nginx.crt
 KEY=$CERT_DIR/nginx.key
 DOMAIN=fcatala-.42.fr
 
-# Create directory first
+# Create directory
 mkdir -p "$CERT_DIR"
 
 if [ ! -f "$CRT" ] || [ ! -f "$KEY" ]; then

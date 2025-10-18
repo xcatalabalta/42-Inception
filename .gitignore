@@ -2,7 +2,7 @@
 secrets/
 
 # All .txt (generatated by script)
-# *.txt
+*.txt
 
 # Environment files
 srcs/.env

@@ -15,11 +15,11 @@ if [ ! -d /var/lib/mysql/mysql ]; then
     mariadb-install-db --user=mysql --datadir="/var/lib/mysql"
 
     # Start the MariaDB server in the background temporarily for setup.
-    # We use --skip-bind-address to ensure clean localhost socket connection.
+    # --skip-bind-address to ensure clean localhost socket connection.
     /usr/bin/mariadbd --user=mysql --datadir="/var/lib/mysql" --skip-networking --skip-bind-address &
     MYSQL_PID=$!
     
-    # CRITICAL FIX: Implement a robust readiness check (replaces 'sleep 10')
+    # Robust readiness check
     TRIES=0
     MAX_TRIES=30
     echo "Waiting for temporary MariaDB server to be ready..."
@@ -48,9 +48,9 @@ CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 GRANT ALL PRIVILEGES ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';
 
--- Remove anonymous users and remote root access for security
+-- Remove anonymous users
 DELETE FROM mysql.user WHERE User='';
--- DO NOT DELETE root user (the former idea was good but it didn't work)
+-- The following line was a good idea in terms of security: remote root access, but a disaster in practice
 -- DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
 
 -- Apply the changes

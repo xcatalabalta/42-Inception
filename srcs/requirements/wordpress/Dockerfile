@@ -1,7 +1,6 @@
 FROM alpine:3.21
 
 # Install necessary packages: PHP-FPM and required extensions for WordPress on Alpine
-# We add 'shadow' to ensure 'addgroup' and 'adduser' function correctly for custom user creation.
 RUN apk update && \
     apk add --no-cache \
     php83 \
@@ -20,15 +19,12 @@ RUN apk update && \
     curl \
     tar \
     shadow \
-    # Clean up apk cache
     && rm -rf /var/cache/apk/*
 
 # Create the base web directory before extraction
 RUN mkdir -p /var/www 
 
-# Explicitly ensure the www-data group and user exist.
-# The `|| true` makes the command idempotent by ignoring the error if the user/group already exists.
-# We also redirect error output to null (`2>/dev/null`) for cleaner build logs.
+# Ensure the www-data group and user exist.
 RUN addgroup -S www-data 2>/dev/null || true && \
     adduser -D -S -G www-data www-data 2>/dev/null || true
 
@@ -38,7 +34,7 @@ RUN curl -L https://wordpress.org/latest.tar.gz -o /tmp/latest.tar.gz && \
     rm /tmp/latest.tar.gz && \
     mv /var/www/wordpress /var/www/html
 
-# Download and install wp-cli (FIXED in Step 6)
+# Download and install wp-cli
 RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
     chmod +x /usr/local/bin/wp
 

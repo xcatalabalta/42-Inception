@@ -20,7 +20,6 @@ setup: setup-secrets
 	@echo -e "$(YELLOW)Creating data directories...$(NC)"
 	@mkdir -p $(DATA_PATH)/mariadb
 	@mkdir -p $(DATA_PATH)/wordpress
-#	@mkdir -p $(DATA_PATH)/adminer
 	@chmod -R u+w $(DATA_PATH) 2>/dev/null || true
 	@chmod -R u+w secrets 2>/dev/null || true
 	@echo -e "$(GREEN)Setup complete!$(NC)"
@@ -52,8 +51,8 @@ setup-secrets:
 		./scripts/setup_secrets.sh; \
 		chmod 600 $(SECRETS_DIR)/*; \
 		echo ""; \
-		echo -e "$(GREEN)✅ Secrets created successfully!$(NC)"; \
-		echo -e "$(YELLOW)⚠️  Keep ./$(SECRETS_DIR)/ safe$(NC)"; \
+		echo -e "$(GREEN)Secrets created successfully!$(NC)"; \
+		echo -e "$(YELLOW)Keep ./$(SECRETS_DIR)/ safe$(NC)"; \
 	fi
 
 # Build all containers
@@ -82,13 +81,13 @@ clean: down
 # Full clean including volumes data
 fclean: clean
 	@echo -e "$(RED)Removing all data...$(NC)"
-	@mkdir -p $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress $(DATA_PATH)/adminer
-	@chmod -R u+w $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress $(DATA_PATH)/adminer 2>/dev/null || true
+	@mkdir -p $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress
+	@chmod -R u+w $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress 2>/dev/null || true
 	@rm -rf $(DATA_PATH)/mariadb/* 2>/dev/null || true
 	@rm -rf $(DATA_PATH)/wordpress/* 2>/dev/null || true
 	@rm -rf $(DATA_PATH)/adminer/* 2>/dev/null || true
 	@rm -rf $(SECRETS_DIR)
-	@chown -R $(USER):$(USER) $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress $(DATA_PATH)/adminer 2>/dev/null || true
+	@chown -R $(USER):$(USER) $(DATA_PATH)/mariadb $(DATA_PATH)/wordpress 2>/dev/null || true
 	@docker system prune -af --volumes > /dev/null 2>&1 || true
 	@echo -e "$(GREEN)Full clean complete!$(NC)"
 	@if [ -z "$$(docker ps -q)" ]; then \
